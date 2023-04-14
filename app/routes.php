@@ -19,6 +19,8 @@ $route->auth();
 // Dashboard
 $route->get('/dashboard', [DashboardController::class, 'index']);
 
+// Roles
+$route->resource('/roles', RoleController::class);
+
 // Users
 $route->resource('/users', UserController::class);
-$route->get('/users/2fa/{id}', [UserController::class, 'two_fa']);

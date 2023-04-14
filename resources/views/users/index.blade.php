@@ -1,19 +1,24 @@
-<x-template-dashboard active="users">
+<x-template-dashboard active="users" title="Usuarios">
 	<div class="w-full p-3">
-        <h1 class="text-3xl mb-4">{{ lang('users.users') }}</h1>
+        <form>
+            <div class="row mb-3">
+                <div class="col-8">
+                    <input autofocus type="text" name="search" placeholder="{{ lang('users.search') }}" value="{{ get('search') ?? '' }}" class="form-control">
+                </div>
 
-        <div class="row mb-3">
-            <div class="col-9">
-                <input x-on:keyup="search($el)" autofocus type="text" placeholder="{{ lang('users.search') }}" class="form-control">
-            </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-eye mr-2"></i> 
+                        Buscar
+                    </button>
 
-            <div class="col-3">
-                <a href="/users/create" class="btn btn-block btn-primary">
-                    <i class="fa fa-plus mr-2"></i> 
-                    {{ lang('users.create') }}
-                </a>
+                    <a href="/users/create" class="btn btn-primary">
+                        <i class="fa fa-plus mr-2"></i> 
+                        {{ lang('users.create') }}
+                    </a>
+                </div>
             </div>
-        </div>
+        </form>
 
         <x-alert></x-alert>
 
@@ -43,7 +48,7 @@
                                 <fa class="fa fa-edit"></fa>
                             </a>
 
-                            <a x-on:click="confirmDelete(event, $el)" class="hover:text-red-600 p-1" href="{{ '/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
+                            <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
                                 <fa class="fa fa-trash"></fa>
                             </a>
                         </td>

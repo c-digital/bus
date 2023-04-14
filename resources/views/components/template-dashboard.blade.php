@@ -54,12 +54,22 @@
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link {{ $active == 'users' ? 'active' : '' }}" href="/users">
             <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="fa fa-user"></i>
             </div>
             <span class="nav-link-text ms-1">Usuarios</span>
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link {{ $active == 'roles' ? 'active' : '' }}" href="/roles">
+            <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i class="fa fa-user"></i>
+            </div>
+            <span class="nav-link-text ms-1">Roles</span>
           </a>
         </li>
       </ul>
@@ -71,10 +81,8 @@
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Dashboard</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+          <h6 class="font-weight-bolder mb-0">{{ $title }}</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -378,6 +386,8 @@
   <script src="{{ asset('js/soft-ui-dashboard.min.js?v=1.0.7') }}"></script>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.js" defer></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="{{ asset('js/main.js') }}"></script>
 </body>
 

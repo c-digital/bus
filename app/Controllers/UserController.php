@@ -25,7 +25,9 @@ class UserController extends Controller
      */
     public function index(): View
     {
-        $users = User::get();
+        $users = User::name(get('search'))
+            ->email(get('search'))
+            ->get();
 
         return view('users.index', compact('users'));
     }
@@ -48,18 +50,15 @@ class UserController extends Controller
      */
     public function store(UserStoreValidation $validation): Redirect
     {
-        $file = request('photo')->save('resources/assets/img');
-
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => encrypt(request('password')),
-            'photo' => $file->filename,
+            'password' => encrypt(request('password'))
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
 
-        return redirect('/dashboard/users')->with('info', lang('users.store'));
+        return redirect('/users')->with('info', lang('users.store'));
     }
 
     /**
@@ -83,32 +82,19 @@ class UserController extends Controller
      */
     public function update(UserUpdateValidation $validation): Redirect
     {
-        $file = request('photo')->save('resources/assets/img');
-
         $user = User::find(request('id'));
         $user->update([
             'name' => request('name'),
             'email' => request('email'),
+            'password' => encrypt(request('password')),
         ]);
-
-        if (request('password')) {
-            $user->update([
-                'password' => encrypt(request('password')),
-            ]);
-        }
-
-        if ($file->filename != '') {
-            $user->update([
-                'photo' => $file->filename,
-            ]);
-        }
 
         if ($user->id == session('id')) {
             session('name', $user->name);
             session('photo', $user->photo);
         }
 
-        return redirect('/dashboard/users')->with('info', lang('users.update'));
+        return redirect('/users')->with('info', lang('users.update'));
     }
 
     public function two_fa($id)
@@ -135,11 +121,11 @@ class UserController extends Controller
     public function delete(int $id): Redirect
     {
         if ($id == session('id')) {
-            return redirect('/dashboard/users')->with('error', lang('users.in_use'));
+            return redirect('/users')->with('error', lang('users.in_use'));
         }
 
         User::find($id)->delete();
 
-        return redirect('/dashboard/users')->with('info', lang('users.delete'));
+        return redirect('/users')->with('info', lang('users.delete'));
     }
 }
