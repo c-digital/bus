@@ -12,10 +12,12 @@
                         Buscar
                     </button>
 
-                    <a href="/users/create" class="btn btn-primary">
-                        <i class="fa fa-plus mr-2"></i> 
-                        {{ lang('users.create') }}
-                    </a>
+                    @if(can('users.create'))
+                        <a href="/users/create" class="btn btn-primary">
+                            <i class="fa fa-plus mr-2"></i> 
+                            {{ lang('users.create') }}
+                        </a>
+                    @endif
                 </div>
             </div>
         </form>
@@ -44,13 +46,17 @@
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2 hidden sm:table-cell">{{ $user->email }}</td>
                         <td class="p-2 text-right">
-                            <a class="hover:text-blue-600 p-1" href="{{ '/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">
-                                <fa class="fa fa-edit"></fa>
-                            </a>
+                            @if(can('users.edit'))
+                                <a class="hover:text-blue-600 p-1" href="{{ '/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">
+                                    <fa class="fa fa-edit"></fa>
+                                </a>
+                            @endif
 
-                            <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
-                                <fa class="fa fa-trash"></fa>
-                            </a>
+                            @if(can('users.delete'))
+                                <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/users/delete/' . $user->id }}" title="{{ lang('users.delete') }}">
+                                    <fa class="fa fa-trash"></fa>
+                                </a>
+                            @endif
                         </td>
                     </tr>
                     @endforeach

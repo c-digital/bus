@@ -2,6 +2,8 @@
 	<div class="w-full p-3">
         <x-alert></x-alert>
 
+        <a href="/roles/create" class="btn btn-primary">Agregar rol</a>
+
         <div class="bg-white border rounded shadow p-3 text-lg">
             <table id="table" class="table table-hover w-full">
                 <thead class="border-b-2">
@@ -24,7 +26,7 @@
                                 <fa class="fa fa-edit"></fa>
                             </a>
 
-                            <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/users/roles/' . $user->id }}" title="Eliminar">
+                            <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/roles/' . $user->id }}" title="Eliminar">
                                 <fa class="fa fa-trash"></fa>
                             </a>
                         </td>

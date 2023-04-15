@@ -55,23 +55,27 @@
           </a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link {{ $active == 'users' ? 'active' : '' }}" href="/users">
-            <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-user"></i>
-            </div>
-            <span class="nav-link-text ms-1">Usuarios</span>
-          </a>
-        </li>
+        @if(can('users.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'users' ? 'active' : '' }}" href="/users">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-user"></i>
+              </div>
+              <span class="nav-link-text ms-1">Usuarios</span>
+            </a>
+          </li>
+        @endif
 
-        <li class="nav-item">
-          <a class="nav-link {{ $active == 'roles' ? 'active' : '' }}" href="/roles">
-            <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="fa fa-user"></i>
-            </div>
-            <span class="nav-link-text ms-1">Roles</span>
-          </a>
-        </li>
+        @if(can('roles.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'roles' ? 'active' : '' }}" href="/roles">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-user"></i>
+              </div>
+              <span class="nav-link-text ms-1">Roles</span>
+            </a>
+          </li>
+        @endif
       </ul>
     </div>
   </aside>

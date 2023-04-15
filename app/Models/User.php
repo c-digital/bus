@@ -28,12 +28,10 @@ class User extends Model
         'name',
         'email',
         'password',
-        'permissions',
+        'role',
         'oauth',
         'hash',
         'two_fa',
-        'sessions',
-        'date_verified_email',
         'date_create',
         'date_update'
     ];

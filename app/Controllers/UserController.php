@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use App\Validations\UserStoreValidation;
 use App\Validations\UserUpdateValidation;
@@ -24,7 +25,7 @@ class UserController extends Controller
      * @return View
      */
     public function index(): View
-    {
+    {        
         $users = User::name(get('search'))
             ->email(get('search'))
             ->get();
@@ -39,7 +40,9 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('users.create');
+        $roles = Role::get();
+
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -53,7 +56,8 @@ class UserController extends Controller
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
-            'password' => encrypt(request('password'))
+            'password' => encrypt(request('password')),
+            'role' => request('role'),
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
@@ -70,8 +74,9 @@ class UserController extends Controller
     public function edit(int $id): View
     {
         $user = User::find($id);
+        $roles = Role::get();
 
-        return view('users.edit', compact('user'));
+        return view('users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -87,6 +92,7 @@ class UserController extends Controller
             'name' => request('name'),
             'email' => request('email'),
             'password' => encrypt(request('password')),
+            'role' => request('role'),
         ]);
 
         if ($user->id == session('id')) {

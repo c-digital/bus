@@ -13,6 +13,34 @@ class RoleController extends Controller
         return view('roles.index', compact('roles'));
     }
 
+    public function create()
+    {
+        $modules = DB::table('permissions')
+            ->selectRaw("SUBSTRING_INDEX(name, '.', 1) AS module")
+            ->groupBy('module')
+            ->get();
+
+        return view('roles.create', compact('modules'));
+    }
+
+    public function store()
+    {
+        Role::create([
+            'name' => request('name'),
+            'description' => request('description')
+        ]);
+
+        foreach (request('permissions') as $id_permission) {
+            DB::table('role_has_permissions')
+                ->insert([
+                    'id_role' => request('id'),
+                    'id_permission' => $id_permission
+                ]);
+        }
+
+        return redirect('/roles')->with('success', 'Rol creado satisfactoriamente');
+    }
+
     public function edit($id)
     {
         $role = Role::find($id);
@@ -46,5 +74,11 @@ class RoleController extends Controller
         }
 
         return redirect('/roles')->with('success', 'Rol actualizado satisfactoriamente');
+    }
+
+    public function delete($id)
+    {
+        Role::find($id)->delete();
+        return redirect('/roles')->with('success', 'Rol eliminado satisfactoriamente');
     }
 }
