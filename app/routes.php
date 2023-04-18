@@ -22,5 +22,17 @@ $route->get('/dashboard', [DashboardController::class, 'index']);
 // Roles
 $route->resource('/roles', RoleController::class);
 
+// Companies
+$route->resource('/companies', CompanyController::class);
+
+// Branch
+$route->resource('/branch', BranchController::class);
+
+// Cities
+$route->resource('/cities', CityController::class);
+
+// Routes
+$route->resource('/routes', RouteController::class);
+
 // Users
 $route->resource('/users', UserController::class);

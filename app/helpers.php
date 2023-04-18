@@ -11,10 +11,12 @@ function permission_id($module, $permission)
 	return $db->id;
 }
 
-function hasPermission($id_role, $id_permission)
+function hasPermission($role, $id_permission)
 {
+	$role = Role::where('name', $role)->first();
+
 	$db = DB::table('role_has_permissions')
-		->where('id_role', $id_role)
+		->where('id_role', $role->id)
 		->where('id_permission', $id_permission)
 		->get();
 

@@ -6,3 +6,17 @@ function confirmDelete(event, that) {
         window.location.href = href;
     }
 }
+
+$(document).ready(function () {
+    $('[name=origin]').change(function () {
+        origin = $('[name=origin]').val();
+        destination = $('[name=destination]').val();
+        $('[name=name]').val(origin + ' x ' + destination);
+    });
+
+    $('[name=destination]').change(function () {
+        origin = $('[name=origin]').val();
+        destination = $('[name=destination]').val();
+        $('[name=name]').val(origin + ' x ' + destination);
+    });
+});

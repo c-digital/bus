@@ -76,6 +76,50 @@
             </a>
           </li>
         @endif
+
+        @if(can('companies.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'companies' ? 'active' : '' }}" href="/companies">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-building"></i>
+              </div>
+              <span class="nav-link-text ms-1">Compañías</span>
+            </a>
+          </li>
+        @endif
+
+        @if(can('branch.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'branch' ? 'active' : '' }}" href="/cities">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-code-branch"></i>
+              </div>
+              <span class="nav-link-text ms-1">Sucursales</span>
+            </a>
+          </li>
+        @endif
+
+        @if(can('cities.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'cities' ? 'active' : '' }}" href="/cities">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-city"></i>
+              </div>
+              <span class="nav-link-text ms-1">Ciudades</span>
+            </a>
+          </li>
+        @endif
+
+        @if(can('routes.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'routes' ? 'active' : '' }}" href="/routes">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-route"></i>
+              </div>
+              <span class="nav-link-text ms-1">Rutas</span>
+            </a>
+          </li>
+        @endif
       </ul>
     </div>
   </aside>

@@ -30,6 +30,13 @@ class UserController extends Controller
             ->email(get('search'))
             ->get();
 
+        if (auth()->role != 'admin') {
+            $users = User::name(get('search'))
+                ->email(get('search'))
+                ->where('id_company', auth()->id_company)
+                ->get();
+        }
+
         return view('users.index', compact('users'));
     }
 
