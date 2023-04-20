@@ -19,4 +19,21 @@ $(document).ready(function () {
         destination = $('[name=destination]').val();
         $('[name=name]').val(origin + ' x ' + destination);
     });
+
+    $('.select2').select2();
+
+    $('.dropdown-menu-container').hide();
+
+    $('.dropdown-menu-select').click(function () {
+
+        menu = $(this).attr('data-menu');
+
+        console.log($(menu).is(':visible'));
+
+        if ($(menu).is(':visible')) {
+            $(menu).hide();
+        } else {
+            $(menu).show();
+        }
+    })
 });

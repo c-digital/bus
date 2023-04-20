@@ -25,6 +25,9 @@ class RouteController extends Controller
         Route::create([
             'destination' => request('destination'),
             'origin' => request('origin'),
+            'status' => request('status'),
+            'time' => request('time'),
+            'distance' => request('distance'),
         ]);
 
         return redirect('/routes')->with('success', 'Ruta creada satisfactoriamente');
@@ -43,6 +46,9 @@ class RouteController extends Controller
             ->update([
                 'destination' => request('destination'),
                 'origin' => request('origin'),
+                'status' => request('status'),
+                'time' => request('time'),
+                'distance' => request('distance'),
             ]);
 
         return redirect('/routes')->with('success', 'Ruta actualizado satisfactoriamente');

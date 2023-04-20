@@ -34,5 +34,8 @@ $route->resource('/cities', CityController::class);
 // Routes
 $route->resource('/routes', RouteController::class);
 
+// Travels
+$route->resource('/travels', TravelController::class);
+
 // Users
 $route->resource('/users', UserController::class);

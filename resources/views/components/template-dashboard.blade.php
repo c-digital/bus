@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="{{ node('@fortawesome/fontawesome-free/css/all.css') }}">
   <!-- CSS Files -->
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -57,68 +59,114 @@
 
         @if(can('users.index'))
           <li class="nav-item">
-            <a class="nav-link {{ $active == 'users' ? 'active' : '' }}" href="/users">
+            <a data-menu="#users" class="dropdown-menu-select nav-link {{ $active == 'users' ? 'active' : '' }}" href="#">
               <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-user"></i>
               </div>
               <span class="nav-link-text ms-1">Usuarios</span>
             </a>
           </li>
-        @endif
 
-        @if(can('roles.index'))
-          <li class="nav-item">
-            <a class="nav-link {{ $active == 'roles' ? 'active' : '' }}" href="/roles">
-              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-user"></i>
-              </div>
-              <span class="nav-link-text ms-1">Roles</span>
-            </a>
-          </li>
+          <div id="users" class="{{ $active == 'users' || $active == 'roles' ? '' : 'dropdown-menu-container' }}">
+            @if(can('users.index'))
+              <li class="nav-item">
+                <a data-menu="#users" class="dropdown-menu-select nav-link {{ $active == 'users' ? 'active' : '' }}" href="/users">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Usuarios</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('roles.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'roles' ? 'active' : '' }}" href="/roles">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-user"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Roles</span>
+                </a>
+              </li>
+            @endif
+          </div>
         @endif
 
         @if(can('companies.index'))
           <li class="nav-item">
-            <a class="nav-link {{ $active == 'companies' ? 'active' : '' }}" href="/companies">
+            <a data-menu="#companies" class="dropdown-menu-select nav-link {{ $active == 'companies' || $active == 'branch' ? 'active' : '' }}" href="#">
               <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-building"></i>
               </div>
-              <span class="nav-link-text ms-1">Compañías</span>
+              <span class="nav-link-text ms-1">Empresa</span>
             </a>
           </li>
-        @endif
 
-        @if(can('branch.index'))
-          <li class="nav-item">
-            <a class="nav-link {{ $active == 'branch' ? 'active' : '' }}" href="/cities">
-              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-code-branch"></i>
-              </div>
-              <span class="nav-link-text ms-1">Sucursales</span>
-            </a>
-          </li>
-        @endif
+          <div id="companies" class="{{ $active == 'branch' || $active == 'companies' ? '' : 'dropdown-menu-container' }}">
+            @if(can('companies.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'companies' ? 'active' : '' }}" href="/companies">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-building"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Compañías</span>
+                </a>
+              </li>
+            @endif
 
-        @if(can('cities.index'))
-          <li class="nav-item">
-            <a class="nav-link {{ $active == 'cities' ? 'active' : '' }}" href="/cities">
-              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                <i class="fa fa-city"></i>
-              </div>
-              <span class="nav-link-text ms-1">Ciudades</span>
-            </a>
-          </li>
-        @endif
+            @if(can('branch.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'branch' ? 'active' : '' }}" href="/cities">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-code-branch"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Sucursales</span>
+                </a>
+              </li>
+            @endif
+          </div>
+        @endif        
 
-        @if(can('routes.index'))
+        @if(can('travels.index'))
           <li class="nav-item">
-            <a class="nav-link {{ $active == 'routes' ? 'active' : '' }}" href="/routes">
+            <a data-menu="#travels" class="dropdown-menu-select nav-link {{ $active == 'travels' || $active == 'cities' || $active == 'routes' ? 'active' : '' }}" href="#">
               <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-route"></i>
               </div>
-              <span class="nav-link-text ms-1">Rutas</span>
+              <span class="nav-link-text ms-1">Viajes</span>
             </a>
           </li>
+
+          <div id="travels" class="{{ $active == 'travels' || $active == 'cities' || $active == 'routes' ? '' : 'dropdown-menu-container' }}">
+            @if(can('cities.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'cities' ? 'active' : '' }}" href="/cities">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-city"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Ciudades</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('routes.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'routes' ? 'active' : '' }}" href="/routes">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-route"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Rutas</span>
+                </a>
+              </li>
+            @endif
+
+            <a class="nav-link {{ $active == 'travels' ? 'active' : '' }}" href="/travels">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-route"></i>
+              </div>
+              <span class="nav-link-text ms-1">Viajes</span>
+            </a>
+          </div>
         @endif
       </ul>
     </div>
@@ -436,7 +484,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.js" defer></script>
 
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
   <script src="{{ asset('js/main.js') }}"></script>
+
 </body>
 
 </html>

@@ -1,6 +1,6 @@
-<x-template-dashboard active="cities" title="Editar ciudad">
+<x-template-dashboard active="routes" title="Editar ruta">
     <div class="w-full p-3">
-        <form action="/cities/update" method="POST" enctype="multipart/form-data">
+        <form action="/routes/update" method="POST" enctype="multipart/form-data">
             <x-alert/>
 
             <input type="hidden" name="id" value="{{ $route->id }}">
@@ -32,6 +32,25 @@
                                 <option {{ $route->destination == $city->name ? 'selected' : '' }} value="{{ $city->name }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="status">Estado</label>
+
+                        <div>
+                            <input {{ $route->status == 'active' ? 'checked' : '' }}} type="radio" name="status" value="active"> Activo
+                            <input {{ $route->status == 'inactive' ? 'checked' : '' }}} type="radio" name="status" value="inactive"> Inactivo
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Tiempo de viaje en horas</label>
+                        <input value="{{ $route->time }}" type="text" name="time" required class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="distance">Distancia en km</label>
+                        <input value="{{ $route->distance }}" type="text" name="distance" required class="form-control">
                     </div>
 
                     <button class="btn btn-primary">Registrar</button>
