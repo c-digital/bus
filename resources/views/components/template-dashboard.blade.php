@@ -168,6 +168,41 @@
             </a>
           </div>
         @endif
+
+        @if(can('travels.index'))
+          <li class="nav-item">
+            <a data-menu="#fleet" class="dropdown-menu-select nav-link {{ $active == 'bus-type' || $active == 'vehicle' ? 'active' : '' }}" href="#">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-bus"></i>
+              </div>
+              <span class="nav-link-text ms-1">Flota</span>
+            </a>
+          </li>
+
+          <div id="fleet" class="{{ $active == 'bus-type' || $active == 'vehicle' ? '' : 'dropdown-menu-container' }}">
+            @if(can('bus-type.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'bus-type' ? 'active' : '' }}" href="/bus-type">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-list"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Tipo de bus</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('vehicle.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'vehicle' ? 'active' : '' }}" href="/vehicle">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-car"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Vehículos</span>
+                </a>
+              </li>
+            @endif
+          </div>
+        @endif
       </ul>
     </div>
   </aside>

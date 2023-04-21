@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 18, 2023 at 07:22 PM
+-- Generation Time: Apr 20, 2023 at 02:36 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -31,6 +31,23 @@ CREATE TABLE `branch` (
   `email` varchar(256) DEFAULT NULL,
   `phone` varchar(256) DEFAULT NULL,
   `id_company` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bus_type`
+--
+
+CREATE TABLE `bus_type` (
+  `id` int(11) NOT NULL,
+  `type` varchar(256) DEFAULT NULL,
+  `design` varchar(256) DEFAULT NULL,
+  `total_seats` varchar(256) DEFAULT NULL,
+  `seats_number` varchar(256) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -139,7 +156,15 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (29, 'travels.index', 'Ver viaje', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
 (30, 'travels.create', 'Crear viaje', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
 (31, 'travels.edit', 'Editar viaje', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
-(32, 'travels.delete', 'Eliminar viaje', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
+(32, 'travels.delete', 'Eliminar viaje', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(33, 'bus-type.index', 'Ver tipo de bus', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
+(34, 'bus-type.create', 'Crear tipo de bus', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(35, 'bus-type.edit', 'Editar tipo de bus', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(36, 'bus-type.delete', 'Eliminar tipo de bus', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(37, 'vehicle.delete', 'Eliminar vehículo', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(38, 'vehicle.index', 'Ver vehículo', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
+(39, 'vehicle.create', 'Crear vehículo', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(40, 'vehicle.edit', 'Editar vehículo', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
 
 -- --------------------------------------------------------
 
@@ -209,7 +234,15 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (29, 1, 29, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (30, 1, 30, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (31, 1, 31, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(32, 1, 32, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(32, 1, 32, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(33, 1, 33, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(34, 1, 34, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(35, 1, 35, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(36, 1, 36, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(37, 1, 37, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(38, 1, 38, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(39, 1, 39, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(40, 1, 40, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -273,6 +306,27 @@ INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `
 (1, NULL, 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '', 'admin', NULL, 'c4ca4238a0b923820dcc509a6f75849b', '2023-04-11 17:18:41', '2023-04-17 19:02:55'),
 (4, NULL, 'Rasth', 'nisadelgado@gmail.com', 'd7b90bfe586df34ce1727d9d26e9aee4', '3', 'company', NULL, NULL, '2023-04-17 20:18:50', '2023-04-17 20:20:48');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vehicles`
+--
+
+CREATE TABLE `vehicles` (
+  `id` int(11) NOT NULL,
+  `type` varchar(256) DEFAULT NULL,
+  `internal_number` varchar(256) DEFAULT NULL,
+  `plate` varchar(256) DEFAULT NULL,
+  `year` varchar(256) DEFAULT NULL,
+  `model` varchar(256) DEFAULT NULL,
+  `chasis_number` varchar(256) DEFAULT NULL,
+  `owner` varchar(256) DEFAULT NULL,
+  `owner_phone` varchar(256) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
@@ -281,6 +335,12 @@ INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `
 -- Indexes for table `branch`
 --
 ALTER TABLE `branch`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `bus_type`
+--
+ALTER TABLE `bus_type`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -340,6 +400,12 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `hash` (`hash`);
 
 --
+-- Indexes for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -347,6 +413,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `branch`
 --
 ALTER TABLE `branch`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `bus_type`
+--
+ALTER TABLE `bus_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -371,7 +443,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -383,7 +455,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `routes`
@@ -402,4 +474,10 @@ ALTER TABLE `travels`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `vehicles`
+--
+ALTER TABLE `vehicles`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;

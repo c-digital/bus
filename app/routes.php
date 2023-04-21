@@ -19,6 +19,9 @@ $route->auth();
 // Dashboard
 $route->get('/dashboard', [DashboardController::class, 'index']);
 
+// Users
+$route->resource('/users', UserController::class);
+
 // Roles
 $route->resource('/roles', RoleController::class);
 
@@ -37,5 +40,8 @@ $route->resource('/routes', RouteController::class);
 // Travels
 $route->resource('/travels', TravelController::class);
 
-// Users
-$route->resource('/users', UserController::class);
+// Bus type
+$route->resource('/bus-type', BusTypeController::class);
+
+// Vehicle
+$route->resource('/vehicle', VehicleController::class);
