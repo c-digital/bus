@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-class Travel extends Model
+class Assign extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'travels';
+    protected $table = 'assign';
 
     /**
      * The primary key associated with the table.
@@ -23,5 +23,5 @@ class Travel extends Model
      *
      * @var array
      */
-    protected $fillable = ['time', 'days', 'status', 'stops', 'route', 'price'];
+    protected $fillable = ['date', 'driver', 'vehicle', 'travel'];
 }

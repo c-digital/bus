@@ -137,7 +137,7 @@
             </a>
           </li>
 
-          <div id="travels" class="{{ $active == 'travels' || $active == 'cities' || $active == 'routes' ? '' : 'dropdown-menu-container' }}">
+          <div id="travels" class="{{ $active == 'travels' || $active == 'cities' || $active == 'routes' || $active == 'assign' ? '' : 'dropdown-menu-container' }}">
             @if(can('cities.index'))
               <li class="nav-item">
                 <a class="nav-link {{ $active == 'cities' ? 'active' : '' }}" href="/cities">
@@ -166,6 +166,17 @@
               </div>
               <span class="nav-link-text ms-1">Viajes</span>
             </a>
+
+            @if(can('assign.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'assign' ? 'active' : '' }}" href="/assign">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-arrow-down"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Asignación</span>
+                </a>
+              </li>
+            @endif
           </div>
         @endif
 
@@ -202,6 +213,17 @@
               </li>
             @endif
           </div>
+        @endif
+
+        @if(can('customers.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'customers' ? 'active' : '' }}" href="/customers">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-users"></i>
+              </div>
+              <span class="nav-link-text ms-1">Clientes</span>
+            </a>
+          </li>
         @endif
       </ul>
     </div>

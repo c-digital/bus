@@ -52,6 +52,11 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="text" required name="price" class="form-control">
+                    </div>
+
                     <button class="btn btn-primary">Registrar</button>
 
                     <a href="/travels" class="btn btn-danger">Volver a atrás</a>

@@ -49,9 +49,14 @@
                         <label for="status">Estado</label>
 
                         <div>
-                            <input {{ $route->status == 'active' ? 'checked' : '' }} type="radio" name="status" value="active"> Activo
-                            <input {{ $route->status == 'inactive' ? 'checked' : '' }} type="radio" name="status" value="inactive"> Inactivo
+                            <input {{ $travel->status == 'active' ? 'checked' : '' }} type="radio" name="status" value="active"> Activo
+                            <input {{ $travel->status == 'inactive' ? 'checked' : '' }} type="radio" name="status" value="inactive"> Inactivo
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="price">Precio</label>
+                        <input type="text" required name="price" class="form-control" value="{{ $travel->price }}">
                     </div>
 
                     <button class="btn btn-primary">Registrar</button>

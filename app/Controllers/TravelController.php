@@ -30,6 +30,7 @@ class TravelController extends Controller
             'status' => request('status'),
             'stops' => request('stops'),
             'route' => request('route'),
+            'price' => request('price'),
         ]);
 
         return redirect('/travels')->with('success', 'Viaje creado satisfactoriamente');
@@ -54,6 +55,7 @@ class TravelController extends Controller
                 'status' => request('status'),
                 'stops' => request('stops'),
                 'route' => request('route'),
+                'price' => request('price'),
             ]);
 
         return redirect('/travels')->with('success', 'Viaje actualizado satisfactoriamente');

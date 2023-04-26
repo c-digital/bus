@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-class Travel extends Model
+class Customer extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'travels';
+    protected $table = 'customers';
 
     /**
      * The primary key associated with the table.
@@ -23,5 +23,5 @@ class Travel extends Model
      *
      * @var array
      */
-    protected $fillable = ['time', 'days', 'status', 'stops', 'route', 'price'];
+    protected $fillable = ['name', 'ci', 'date_birth', 'age', 'phone', 'address'];
 }

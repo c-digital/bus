@@ -45,9 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 ml-5 design">
-                            
-                        </div>
+                        <div class="col-md-6 ml-5 design"></div>
                     </div>
 
                     <button class="btn btn-primary">Registrar</button>

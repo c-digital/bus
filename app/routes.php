@@ -45,3 +45,9 @@ $route->resource('/bus-type', BusTypeController::class);
 
 // Vehicle
 $route->resource('/vehicle', VehicleController::class);
+
+// Customers
+$route->resource('/customers', CustomerController::class);
+
+// Assign
+$route->resource('/assign', AssignController::class);
