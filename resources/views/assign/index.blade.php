@@ -25,18 +25,18 @@
                             <tr class="hover:bg-gray-100">
                                 <td class="p-2 hidden sm:table-cell">{{ $item->id }}</td>
                                 <td class="p-2">{{ $item->date }}</td>
-                                <td class="p-2">{{ $item->driver }}</td>
-                                <td class="p-2">{{ $item->vehicle }}</td>
-                                <td class="p-2">{{ $item->travel }}</td>
+                                <td class="p-2">{{ $item->driver->name }}</td>
+                                <td class="p-2">{{ $item->vehicle->internal_number . ' - ' . $item->vehicle->type->type . ' - ' . $item->vehicle->plate }}</td>
+                                <td class="p-2">{{ $item->travel->time . ' - ' . $item->travel->route->destination . ' x ' . $item->travel->route->origin }}</td>
                                 <td class="p-2 text-right">
                                     @if(can('assign.create'))
-                                        <a class="hover:text-blue-600 p-1" href="{{ '/assign/edit/' . $customer->id }}" title="Editar">
+                                        <a class="hover:text-blue-600 p-1" href="{{ '/assign/edit/' . $item->id }}" title="Editar">
                                             <fa class="fa fa-edit"></fa>
                                         </a>
                                     @endif
 
                                     @if(can('assign.create'))
-                                        <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/assign/' . $customer->id }}" title="Eliminar">
+                                        <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/assign/' . $item->id }}" title="Eliminar">
                                             <fa class="fa fa-trash"></fa>
                                         </a>
                                     @endif

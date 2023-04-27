@@ -24,7 +24,7 @@ class Vehicle extends Model
      * @var array
      */
     protected $fillable = [
-        'type',
+        'id_type',
         'internal_number',
         'plate',
         'year',
@@ -34,4 +34,9 @@ class Vehicle extends Model
         'owner_phone',
         'status'
     ];
+
+    public function type()
+    {
+        return $this->belongsTo('BusType', 'id_type');
+    }
 }

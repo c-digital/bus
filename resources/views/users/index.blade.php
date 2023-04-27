@@ -32,6 +32,7 @@
                         <th class="text-left p-2">{{ lang('users.photo') }}</th>
                         <th class="text-left p-2">{{ lang('users.name') }}</th>
                         <th class="text-left p-2 hidden sm:table-cell">{{ lang('users.email') }}</th>
+                        <th class="text-left p-2">Rol</th>
                         <th class="text-left p-2"></th>
                     </tr>
                 </thead>
@@ -45,6 +46,7 @@
                         </td>
                         <td class="p-2">{{ $user->name }}</td>
                         <td class="p-2 hidden sm:table-cell">{{ $user->email }}</td>
+                        <td class="p-2 hidden sm:table-cell">{{ $user->role }}</td>
                         <td class="p-2 text-right">
                             @if(can('users.edit'))
                                 <a class="hover:text-blue-600 p-1" href="{{ '/users/edit/' . $user->id }}" title="{{ lang('users.edit') }}">

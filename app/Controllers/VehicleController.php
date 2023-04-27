@@ -22,7 +22,7 @@ class VehicleController extends Controller
     public function store()
     {
         Vehicle::create([
-            'type' => request('type'),
+            'id_type' => request('type'),
             'internal_number' => request('internal_number'),
             'plate' => request('plate'),
             'year' => request('year'),
@@ -47,7 +47,7 @@ class VehicleController extends Controller
     {
         Vehicle::find(request('id'))
             ->update([
-                'type' => request('type'),
+                'id_type' => request('type'),
                 'internal_number' => request('internal_number'),
                 'plate' => request('plate'),
                 'year' => request('year'),

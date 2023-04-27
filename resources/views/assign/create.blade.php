@@ -21,17 +21,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="vehicle">Conductor</label>
+                        <label for="vehicle">Vehículo</label>
                         <select name="vehicle" class="form-control">
                             <option value=""></option>
                             @foreach($vehicles as $vehicle)
-                                <option value="{{ $vehicle->id }}">{{ $vehicle->name }}</option>
+                                <option value="{{ $vehicle->id }}">{{ $vehicle->internal_number . ' - ' . $vehicle->type->type . ' - ' . $vehicle->plate }}</option>
                             @endforeach
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label for="travel">Conductor</label>
+                        <label for="travel">Viaje</label>
                         <select name="travel" class="form-control">
                             <option value=""></option>
                             @foreach($travels as $travel)

@@ -58,13 +58,21 @@ class UserController extends Controller
      * @param  UserStoreValidation  $validation
      * @return Redirect
      */
-    public function store(UserStoreValidation $validation): Redirect
+    public function store(): Redirect
     {
+        $extra = request('extra');
+
+        if (request('photo')) {
+            $photo = request('photo')->save("img/users");
+            $extra['photo'] = $photo->filename;
+        }
+
         $user = User::create([
             'name' => request('name'),
             'email' => request('email'),
             'password' => encrypt(request('password')),
             'role' => request('role'),
+            'extra' => json($extra),
         ]);
 
         $user->update(['hash' => encrypt($user->id)]);
@@ -92,14 +100,22 @@ class UserController extends Controller
      * @param  UserUpdateValidation  $validation
      * @return Redirect
      */
-    public function update(UserUpdateValidation $validation): Redirect
+    public function update(): Redirect
     {
+        $extra = request('extra');
+
+        if (request('photo')) {
+            $photo = request('photo')->save("img/users");
+            $extra['photo'] = $photo->filename;
+        }
+
         $user = User::find(request('id'));
         $user->update([
             'name' => request('name'),
             'email' => request('email'),
             'password' => encrypt(request('password')),
             'role' => request('role'),
+            'extra' => json($extra)
         ]);
 
         if ($user->id == session('id')) {
@@ -140,5 +156,12 @@ class UserController extends Controller
         User::find($id)->delete();
 
         return redirect('/users')->with('info', lang('users.delete'));
+    }
+
+    public function extra($role)
+    {
+        if (storage()->exists("resources/views/extra/$role.blade.php")) {
+            return view("extra.$role");
+        }
     }
 }

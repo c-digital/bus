@@ -17,7 +17,7 @@ class AssignController extends Controller
 
     public function create()
     {
-        $drivers = User::get();
+        $drivers = User::where('role', 'driver')->get();
         $travels = Travel::get();
         $vehicles = Vehicle::get();
 
@@ -26,11 +26,25 @@ class AssignController extends Controller
 
     public function store()
     {
-        Vehicle::create([
+        $day = carbon()
+            ->parse(request('date'))
+            ->format('l');
+
+        $travel = Travel::find(request('travel'));
+
+        if (! in_array(strtolower($day), json($travel->days))) {
+            $day = translateDays($day);
+            $error = "No puede crear una asignación para el viaje '{$travel->name}' en día $day.";
+
+            return redirect('/assign/create')
+                ->with('error', $error);
+        }
+
+        Assign::create([
             'date' => request('date'),
-            'driver' => request('driver'),
-            'vehicle' => request('vehicle'),
-            'travel' => request('travel')
+            'id_driver' => request('driver'),
+            'id_vehicle' => request('vehicle'),
+            'id_travel' => request('travel')
         ]);
 
         return redirect('/assign')
@@ -40,7 +54,7 @@ class AssignController extends Controller
     public function edit($id)
     {
         $assign = Assign::find($id);
-        $drivers = User::get();
+        $drivers = User::where('role', 'driver')->get();
         $travels = Travel::get();
         $vehicles = Vehicle::get();
 
@@ -49,12 +63,25 @@ class AssignController extends Controller
 
     public function update()
     {
-        $vehicle = Vehicle::find(request('id'));
-        $vehicle->update([
+        $day = carbon()
+            ->parse(request('date'))
+            ->format('l');
+
+        $travel = Travel::find(request('travel'));
+
+        if (! in_array($day, $travel->days)) {
+            $error = "No puede crear una asignación para el viaje '{$travel->name}' en día {$day}.";
+
+            return redirect('/assign/create')
+                ->with('error', $error);
+        }
+        
+        $assign = Assign::find(request('id'));
+        $assign->update([
             'date' => request('date'),
-            'driver' => request('driver'),
-            'vehicle' => request('vehicle'),
-            'travel' => request('travel')
+            'id_driver' => request('driver'),
+            'id_vehicle' => request('vehicle'),
+            'id_travel' => request('travel')
         ]);
 
         return redirect('/assign')

@@ -30,7 +30,21 @@
                                 <option {{ $user->role == $role->name ? 'selected' : '' }} value="{{ $role->name }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
-                    </div>                
+                    </div>
+
+                    <div class="extra">
+                        @if($user->role == 'employee')
+                            @include('extra.edit-employee', compact('user'))
+                        @endif
+
+                        @if($user->role == 'driver')
+                            @include('extra.edit-driver', compact('user'))
+                        @endif
+
+                        @if($user->role == 'agent')
+                            @include('extra.edit-agent', compact('user'))
+                        @endif
+                    </div>            
 
                     <button class="btn btn-primary">Registrar</button>
 

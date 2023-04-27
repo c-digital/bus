@@ -22,13 +22,15 @@
 
                     <div class="form-group">
                         <label for="role">Rol</label>
-                        <select name="role" class="form-control" required>
+                        <select name="role" class="form-control role-create" required>
                             <option value=""></option>
                             @foreach($roles as $role)
                                 <option value="{{ $role->name }}">{{ $role->name }}</option>
                             @endforeach
                         </select>
                     </div>
+
+                    <div class="extra"></div>
 
                     <button class="btn btn-primary">Registrar</button>
 

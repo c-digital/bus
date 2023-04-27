@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 25, 2023 at 07:00 PM
+-- Generation Time: Apr 26, 2023 at 07:04 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -24,12 +24,19 @@ SET time_zone = "+00:00";
 CREATE TABLE `assign` (
   `id` int(11) NOT NULL,
   `date` varchar(256) DEFAULT NULL,
-  `driver` varchar(256) DEFAULT NULL,
-  `vehicle` varchar(256) DEFAULT NULL,
-  `travel` varchar(256) DEFAULT NULL,
+  `id_driver` varchar(256) DEFAULT NULL,
+  `id_vehicle` varchar(256) DEFAULT NULL,
+  `id_travel` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assign`
+--
+
+INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `date_create`, `date_update`) VALUES
+(1, '2023-04-26', '6', '1', '2', '2023-04-26 18:44:20', '2023-04-26 18:44:20');
 
 -- --------------------------------------------------------
 
@@ -93,7 +100,9 @@ CREATE TABLE `cities` (
 --
 
 INSERT INTO `cities` (`id`, `name`, `date_create`, `date_update`) VALUES
-(1, 'Maracaibo', '2023-04-17 22:38:02', '2023-04-17 22:38:02');
+(1, 'Maracaibo', '2023-04-17 22:38:02', '2023-04-17 22:38:02'),
+(2, 'Caracas', '2023-04-26 18:05:36', '2023-04-26 18:05:36'),
+(3, 'Barquisimeto', '2023-04-26 18:16:29', '2023-04-26 18:16:29');
 
 -- --------------------------------------------------------
 
@@ -213,7 +222,11 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (45, 'assign.delete', 'Eliminar asignación', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
 (46, 'assign.index', 'Ver asignación', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
 (47, 'assign.create', 'Crear asignación', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
-(48, 'assign.edit', 'Editar asignación', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
+(48, 'assign.edit', 'Editar asignación', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(49, 'drivers.delete', 'Eliminar conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(50, 'drivers.index', 'Ver conductor', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
+(51, 'drivers.create', 'Crear conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(52, 'drivers.edit', 'Editar conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
 
 -- --------------------------------------------------------
 
@@ -235,7 +248,10 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`id`, `name`, `description`, `date_create`, `date_update`) VALUES
 (1, 'admin', 'Administrador', '2023-04-13 19:15:27', '2023-04-13 20:06:43'),
-(5, 'company', 'Compañía', '2023-04-13 19:15:27', '2023-04-13 20:06:43');
+(5, 'company', 'Compañía', '2023-04-13 19:15:27', '2023-04-13 20:06:43'),
+(6, 'driver', 'Conductor', '2023-04-13 19:15:27', '2023-04-13 20:06:43'),
+(7, 'employee', 'Empleado', '2023-04-13 19:15:27', '2023-04-26 15:08:07'),
+(8, 'agent', 'Agente', '2023-04-13 19:15:27', '2023-04-26 15:07:57');
 
 -- --------------------------------------------------------
 
@@ -299,7 +315,11 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (45, 1, 45, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (46, 1, 46, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (47, 1, 47, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(48, 1, 48, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(48, 1, 48, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(49, 1, 49, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(50, 1, 50, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(51, 1, 51, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(52, 1, 52, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -318,6 +338,13 @@ CREATE TABLE `routes` (
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `routes`
+--
+
+INSERT INTO `routes` (`id`, `destination`, `origin`, `status`, `time`, `distance`, `date_create`, `date_update`) VALUES
+(2, 'Caracas', 'Maracaibo', 'active', '12', '700', '2023-04-26 18:18:04', '2023-04-26 18:18:04');
+
 -- --------------------------------------------------------
 
 --
@@ -330,11 +357,18 @@ CREATE TABLE `travels` (
   `days` varchar(256) DEFAULT NULL,
   `status` varchar(256) DEFAULT NULL,
   `stops` varchar(256) DEFAULT NULL,
-  `route` varchar(256) DEFAULT NULL,
+  `id_route` varchar(256) DEFAULT NULL,
   `price` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `travels`
+--
+
+INSERT INTO `travels` (`id`, `time`, `days`, `status`, `stops`, `id_route`, `price`, `date_create`, `date_update`) VALUES
+(2, '12', '[\"wednesday\"]', 'active', '[\"Barquisimeto\"]', '2', '80', '2023-04-26 18:19:26', '2023-04-26 18:37:58');
 
 -- --------------------------------------------------------
 
@@ -352,6 +386,7 @@ CREATE TABLE `users` (
   `role` varchar(256) NOT NULL,
   `oauth` varchar(256) DEFAULT NULL,
   `hash` varchar(256) DEFAULT NULL,
+  `extra` text,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -360,9 +395,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `role`, `oauth`, `hash`, `date_create`, `date_update`) VALUES
-(1, NULL, 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '', 'admin', NULL, 'c4ca4238a0b923820dcc509a6f75849b', '2023-04-11 17:18:41', '2023-04-17 19:02:55'),
-(4, NULL, 'Rasth', 'nisadelgado@gmail.com', 'd7b90bfe586df34ce1727d9d26e9aee4', '3', 'company', NULL, NULL, '2023-04-17 20:18:50', '2023-04-17 20:20:48');
+INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `role`, `oauth`, `hash`, `extra`, `date_create`, `date_update`) VALUES
+(1, NULL, 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '', 'admin', NULL, 'c4ca4238a0b923820dcc509a6f75849b', NULL, '2023-04-11 17:18:41', '2023-04-17 19:02:55'),
+(4, NULL, 'Rasth', 'nisadelgado@gmail.com', 'd7b90bfe586df34ce1727d9d26e9aee4', '3', 'company', NULL, NULL, NULL, '2023-04-17 20:18:50', '2023-04-17 20:20:48'),
+(6, NULL, 'Conductor 1', 'conductor@grupounebus.com', '202cb962ac59075b964b07152d234b70', '', 'driver', NULL, '1679091c5a880faf6fb5e6087eb1b2dc', '{\"name\":\"Conductor 1\",\"license\":\"123\",\"driver_license\":\"123\",\"phone\":\"123\",\"address\":\"123\",\"photo\":\"cpvDS0KU_400x400.jpg\"}', '2023-04-26 18:15:22', '2023-04-26 18:15:22');
 
 -- --------------------------------------------------------
 
@@ -372,7 +408,7 @@ INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `
 
 CREATE TABLE `vehicles` (
   `id` int(11) NOT NULL,
-  `type` varchar(256) DEFAULT NULL,
+  `id_type` varchar(256) DEFAULT NULL,
   `internal_number` varchar(256) DEFAULT NULL,
   `plate` varchar(256) DEFAULT NULL,
   `year` varchar(256) DEFAULT NULL,
@@ -384,6 +420,13 @@ CREATE TABLE `vehicles` (
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vehicles`
+--
+
+INSERT INTO `vehicles` (`id`, `id_type`, `internal_number`, `plate`, `year`, `model`, `chasis_number`, `owner`, `owner_phone`, `status`, `date_create`, `date_update`) VALUES
+(1, '1', '987', 'a1b2c3', '2018', 'Ford C10', 'dajshd4143', 'Fulatino de Tal', '123', 'active', '2023-04-26 18:28:36', '2023-04-26 18:28:36');
 
 --
 -- Indexes for dumped tables
@@ -483,7 +526,7 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `assign`
 --
 ALTER TABLE `assign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `branch`
@@ -501,7 +544,7 @@ ALTER TABLE `bus_type`
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `companies`
@@ -525,41 +568,41 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `routes`
 --
 ALTER TABLE `routes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `travels`
 --
 ALTER TABLE `travels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `vehicles`
 --
 ALTER TABLE `vehicles`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;

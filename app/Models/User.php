@@ -33,6 +33,7 @@ class User extends Model
         'oauth',
         'hash',
         'two_fa',
+        'extra',
         'date_create',
         'date_update'
     ];

@@ -14,14 +14,14 @@
 
                     <div class="form-group">
                         <label for="days">Días de la semana</label>
-                        <select name="days" multiple class="select2 form-control" required>
-                            <option {{ in_array('monday', $travel->days) ? 'selected' : '' }} value="monday">Lunes</option>
-                            <option {{ in_array('tuesday', $travel->days) ? 'selected' : '' }} value="tuesday">Martes</option>
-                            <option {{ in_array('wednesday', $travel->days) ? 'selected' : '' }} value="wednesday">Miércoles</option>
-                            <option {{ in_array('thursday', $travel->days) ? 'selected' : '' }} value="thursday">Jueves</option>
-                            <option {{ in_array('friday', $travel->days) ? 'selected' : '' }} value="friday">Viernes</option>
-                            <option {{ in_array('saturday', $travel->days) ? 'selected' : '' }} value="saturday">Sábado</option>
-                            <option {{ in_array('sunday', $travel->days) ? 'selected' : '' }} value="sunday">Domingo</option>
+                        <select name="days[]" multiple class="select2 form-control" required>
+                            <option {{ in_array('monday', json($travel->days)) ? 'selected' : '' }} value="monday">Lunes</option>
+                            <option {{ in_array('tuesday', json($travel->days)) ? 'selected' : '' }} value="tuesday">Martes</option>
+                            <option {{ in_array('wednesday', json($travel->days)) ? 'selected' : '' }} value="wednesday">Miércoles</option>
+                            <option {{ in_array('thursday', json($travel->days)) ? 'selected' : '' }} value="thursday">Jueves</option>
+                            <option {{ in_array('friday', json($travel->days)) ? 'selected' : '' }} value="friday">Viernes</option>
+                            <option {{ in_array('saturday', json($travel->days)) ? 'selected' : '' }} value="saturday">Sábado</option>
+                            <option {{ in_array('sunday', json($travel->days)) ? 'selected' : '' }} value="sunday">Domingo</option>
                         </select>
                     </div>
 
@@ -29,7 +29,7 @@
                         <label for="stops">Paradas</label>
                         <select name="stops" multiple class="select2 form-control" required>
                             @foreach($cities as $city)
-                                <option {{ in_array($city->id, $travel->stops) ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
+                                <option {{ in_array($city->name, json($travel->stops)) ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -40,7 +40,7 @@
                             <option value=""></option>
 
                             @foreach($routes as $route)
-                                <option {{ $route->id == $travel->route ? 'selected' : '' }} value="{{ $route->id }}">{{ $route->destination . ' x ' . $route->origin }}</option>
+                                <option {{ $route->id == $travel->id_route ? 'selected' : '' }} value="{{ $route->id }}">{{ $route->destination . ' x ' . $route->origin }}</option>
                             @endforeach
                         </select>
                     </div>

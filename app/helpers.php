@@ -1,5 +1,18 @@
 <?php
 
+function translateDays($days)
+{
+	$string = implode(', ', json($days));
+
+	$string = str_replace(
+		['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'],
+		['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'],
+		$string
+	);
+
+	return $string;
+}
+
 function permission_id($module, $permission)
 {
 	$name = $module . '.' . $permission;

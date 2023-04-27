@@ -23,5 +23,20 @@ class Assign extends Model
      *
      * @var array
      */
-    protected $fillable = ['date', 'driver', 'vehicle', 'travel'];
+    protected $fillable = ['date', 'id_driver', 'id_vehicle', 'id_travel'];
+
+    public function driver()
+    {
+        return $this->belongsTo('User', 'id_driver');
+    }
+
+    public function vehicle()
+    {
+        return $this->belongsTo('Vehicle', 'id_vehicle');
+    }
+
+    public function travel()
+    {
+        return $this->belongsTo('Travel', 'id_travel');
+    }
 }

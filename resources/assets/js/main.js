@@ -8,6 +8,16 @@ function confirmDelete(event, that) {
 }
 
 $(document).ready(function () {
+    $('.role-create').change(function () {
+        role = $(this).val();
+
+        $('.extra').load('/users/extra/' + role, function (response, status, xhr) {
+            if (status == 'error') {
+                console.log(response);
+            }
+        });
+    });
+
     $('[name=origin]').change(function () {
         origin = $('[name=origin]').val();
         destination = $('[name=destination]').val();

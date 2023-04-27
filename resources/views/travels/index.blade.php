@@ -26,20 +26,20 @@
                         <tr class="hover:bg-gray-100">
                             <td class="p-2 hidden sm:table-cell">{{ $travel->id }}</td>
                             <td class="p-2">{{ $travel->time }}</td>
-                            <td class="p-2">{{ $travel->days }}</td>
+                            <td class="p-2">{{ translateDays($travel->days) }}</td>
                             <td class="p-2">{{ $travel->status }}</td>
-                            <td class="p-2">{{ $travel->stops }}</td>
-                            <td class="p-2">{{ $travel->route }}</td>
+                            <td class="p-2">{{ implode(', ', json($travel->stops)) }}</td>
+                            <td class="p-2">{{ $travel->route->origin . ' x ' . $travel->route->destination }}</td>
                             <td class="p-2">{{ $travel->price }}</td>
                             <td class="p-2 text-right">
                                 @if(can('routes.create'))
-                                    <a class="hover:text-blue-600 p-1" href="{{ '/routes/edit/' . $travel->id }}" title="Editar">
+                                    <a class="hover:text-blue-600 p-1" href="{{ '/travels/edit/' . $travel->id }}" title="Editar">
                                         <fa class="fa fa-edit"></fa>
                                     </a>
                                 @endif
 
                                 @if(can('routes.create'))
-                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/routes/' . $travel->id }}" title="Eliminar">
+                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/travels/delete/' . $travel->id }}" title="Eliminar">
                                         <fa class="fa fa-trash"></fa>
                                     </a>
                                 @endif

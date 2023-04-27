@@ -21,8 +21,8 @@
                 	@foreach($routes as $route)
                         <tr class="hover:bg-gray-100">
                             <td class="p-2 hidden sm:table-cell">{{ $route->id }}</td>
-                            <td class="p-2">{{ $route->name }}</td>
-                            <td class="p-2">{{ $route->name }}</td>
+                            <td class="p-2">{{ $route->origin }}</td>
+                            <td class="p-2">{{ $route->destination }}</td>
                             <td class="p-2 text-right">
                                 @if(can('routes.create'))
                                     <a class="hover:text-blue-600 p-1" href="{{ '/routes/edit/' . $route->id }}" title="Editar">
@@ -31,7 +31,7 @@
                                 @endif
 
                                 @if(can('routes.create'))
-                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/routes/' . $route->id }}" title="Eliminar">
+                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/routes/delete/' . $route->id }}" title="Eliminar">
                                         <fa class="fa fa-trash"></fa>
                                     </a>
                                 @endif

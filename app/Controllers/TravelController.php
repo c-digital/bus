@@ -26,10 +26,10 @@ class TravelController extends Controller
     {
         Travel::create([
             'time' => request('time'),
-            'days' => request('days'),
+            'days' => json(request('days')),
             'status' => request('status'),
             'stops' => request('stops'),
-            'route' => request('route'),
+            'id_route' => request('route'),
             'price' => request('price'),
         ]);
 
@@ -51,10 +51,10 @@ class TravelController extends Controller
         Travel::find(request('id'))
             ->update([
                 'time' => request('time'),
-                'days' => request('days'),
+                'days' => json(request('days')),
                 'status' => request('status'),
                 'stops' => request('stops'),
-                'route' => request('route'),
+                'id_route' => request('route'),
                 'price' => request('price'),
             ]);
 

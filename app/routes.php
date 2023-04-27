@@ -21,6 +21,7 @@ $route->get('/dashboard', [DashboardController::class, 'index']);
 
 // Users
 $route->resource('/users', UserController::class);
+$route->get('/users/extra/{role}', [UserController::class, 'extra']);
 
 // Roles
 $route->resource('/roles', RoleController::class);
@@ -51,3 +52,6 @@ $route->resource('/customers', CustomerController::class);
 
 // Assign
 $route->resource('/assign', AssignController::class);
+
+// Drivers
+$route->resource('/drivers', DriverController::class);

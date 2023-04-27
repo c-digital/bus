@@ -12,7 +12,7 @@
 
                     <div class="form-group">
                         <label for="days">Días de la semana</label>
-                        <select name="days" multiple class="select2 form-control" required>
+                        <select name="days[]" multiple class="select2 form-control" required>
                             <option value="monday">Lunes</option>
                             <option value="tuesday">Martes</option>
                             <option value="wednesday">Miércoles</option>
@@ -25,9 +25,9 @@
 
                     <div class="form-group">
                         <label for="stops">Paradas</label>
-                        <select name="stops" multiple class="select2 form-control" required>
+                        <select name="stops[]" multiple class="select2 form-control" required>
                             @foreach($cities as $city)
-                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                                <option value="{{ $city->name }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
                     </div>
