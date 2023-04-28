@@ -16,7 +16,7 @@
 
                             <div class="form-group">
                                 <label for="design">Diseño</label>
-                                <select name="design" class="form-control" required>
+                                <select id="layout" name="design" class="form-control" required>
                                     <option {{ $type->design == '2-2' ? 'selected' : '' }} value="2-2">2-2</option>
                                     <option {{ $type->design == '1-1' ? 'selected' : '' }} value="1-1">1-1</option>
                                     <option {{ $type->design == '2-1' ? 'selected' : '' }} value="2-1">2-1</option>
@@ -28,12 +28,12 @@
 
                             <div class="form-group">
                                 <label for="total_seats">Total de asientos</label>
-                                <input type="text" required name="total_seats" class="form-control" value="{{ $type->total_seats }}">
+                                <input type="text" required id="seat" name="total_seats" class="form-control" value="{{ $type->total_seats }}" onload="myFunction()" onkeyup="myFunction()">
                             </div>
 
                             <div class="form-group">
                                 <label for="seats_number">Número de asientos</label>
-                                <textarea name="seats_number" required class="form-control">{{ $type->seats_number }}</textarea>
+                                <textarea rows="5" id="demo" name="seats_number" required class="form-control">{{ $type->seats_number }}</textarea>
                                 <label class="text-danger">Valores separados por coma</label>
                             </div>
 
@@ -51,7 +51,7 @@
                             <a href="/bus-type" class="btn btn-danger">Volver a atrás</a>
                         </div>
 
-                        <div class="col-md-6 ml-5 design"></div>
+                        <div class="col-md-6 ml-5 design" id="layoutimg"></div>
                     </div>
                 </div>
             </div>

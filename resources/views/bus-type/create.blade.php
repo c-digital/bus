@@ -14,7 +14,7 @@
 
                             <div class="form-group">
                                 <label for="design">Diseño</label>
-                                <select name="design" class="form-control" required>
+                                <select id="layout" name="design" class="form-control" required>
                                     <option value="2-2">2-2</option>
                                     <option value="1-1">1-1</option>
                                     <option value="2-1">2-1</option>
@@ -26,12 +26,12 @@
 
                             <div class="form-group">
                                 <label for="total_seats">Total de asientos</label>
-                                <input type="text" required name="total_seats" class="form-control">
+                                <input type="text" id="seat" required name="total_seats" class="form-control" onkeyup="myFunction()">
                             </div>
 
                             <div class="form-group">
                                 <label for="seats_number">Número de asientos</label>
-                                <textarea name="seats_number" required class="form-control"></textarea>
+                                <textarea rows="5" id="demo" name="seats_number" required class="form-control"></textarea>
                                 <label class="text-danger">Valores separados por coma</label>
                             </div>
 
@@ -45,7 +45,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-6 ml-5 design"></div>
+                        <div class="col-md-6 ml-5 design text-center" id="layoutimg"></div>
                     </div>
 
                     <button class="btn btn-primary">Registrar</button>

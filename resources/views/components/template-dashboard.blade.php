@@ -22,6 +22,27 @@
   <link id="pagestyle" href="{{ asset('css/soft-ui-dashboard.css?v=1.0.7') }}" rel="stylesheet" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    .midlesp {
+      padding-right: 30px;
+      padding-left: 30px;
+    }
+
+    .docIcon {
+        background:url("/resources/assets/img/seat.png") no-repeat center,url("..//resources/assets/img/seat.png") no-repeat center;
+       display: block;
+       width: 60px;
+       height: 60px;
+       margin-left:auto;
+       margin-right:auto;
+       text-align:center;
+       display:inline-block;
+    }
+    .altcss {
+        background:url("..//resources/assets/img/seat.png") no-repeat center;
+    }
+  </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
@@ -222,6 +243,17 @@
                 <i class="fa fa-users"></i>
               </div>
               <span class="nav-link-text ms-1">Clientes</span>
+            </a>
+          </li>
+        @endif
+
+        @if(can('tickets.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'tickets' ? 'active' : '' }}" href="/tickets">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-ticket"></i>
+              </div>
+              <span class="nav-link-text ms-1">Tickets</span>
             </a>
           </li>
         @endif
@@ -545,6 +577,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js" integrity="sha512-2ImtlRlf2VVmiGZsjm9bEyhjGW4dU7B6TNwh/hx/iSByxNENtj3WVE6o/9Lj4TJeVXPi4bnOIMXFIJJAeufa0A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script src="{{ asset('js/main.js') }}"></script>
+  <script src="{{ asset('js/bus-type.js') }}"></script>
 
 </body>
 

@@ -55,3 +55,6 @@ $route->resource('/assign', AssignController::class);
 
 // Drivers
 $route->resource('/drivers', DriverController::class);
+
+// Tickets
+$route->resource('/tickets', TicketController::class);
