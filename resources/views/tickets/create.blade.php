@@ -1,5 +1,4 @@
 <x-template-dashboard active="tickets" title="Tickets">
-
     <style>
         .close {
             color:red;
@@ -9,6 +8,7 @@
             margin: 5px 0;
             color:#fff;
         }
+
         .seat-body {
             position: relative;
             width: 35px;
@@ -22,6 +22,7 @@
             line-height: 35px;
             text-align: center;
         }
+
         .seat-handle-left {
             width: 3px;
             height: 20px;
@@ -33,6 +34,7 @@
             position: absolute;
             border: 1px solid #979797;
         }
+
         .seat-handle-right {
             width: 3px;
             bottom: -1px;
@@ -44,6 +46,7 @@
             position: absolute;
             border: 1px solid #979797;
         }
+
         .seat-bottom {
             width: 35px;
             right: 0px;
@@ -56,7 +59,6 @@
             height: 3px;
         }
 
-
         .seat-visibility{
             visibility: hidden;
         }
@@ -65,37 +67,31 @@
             background-color: #979797;
             border-color:  #979797;
         }
-        /*selected*/
+        
         .seat.selected .seat-body{
             background-color: #5b69bc;
             border-color:  #5b69bc;
             color:#fff;
         }
+
         .seat.selected .seat-body span{
             border-color:  #5b69bc;
         }
-        /*ladies*/
+        
         .seat.ladies .seat-body {
             background-color: #2E8B57;
             border-color: #2E8B57;
         }
+
         .seat.ladies .seat-body span{
             border-color:  #2E8B57;
         }
 
-
         .seat:not(.ladies) .seat-body:hover{
-            /*background-color: #5F69bc;*/
             border-color:  #5b69bc;
         }
         .seat .seat-body:hover span{
             border-color:  #5b69bc;
-        }
-
-
-
-        /*seat details*/
-        .seat-details{
         }
         .seat-details-content{
             margin: 20px 0;
@@ -134,25 +130,44 @@
 		</div>
 	</div>
 
-    <hr>
-
-    <div class="row">
+    <div class="row mt-3">
     	<div class="col-6">
     		<div class="card">
     			<div class="card-header">Asientos</div>
 
-    			<div class="card-body mx-auto">
+    			<div class="card-body mx-auto mb-4">
                     <div class="seatsList">{!! $html !!}</div>
     			</div>
     		</div>
     	</div>
+        </div>
 
     	<div class="col-6">
     		<div class="card">
     			<div class="card-header">Venta</div>
 
-    			<div class="card-body"></div>
+    			<div class="card-body">
+                    <form method="POST" action="/tickets/store">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>C.I.</th>
+                                    <th>Asiento</th>
+                                </tr>
+                            </thead>
+
+                            <tbody class="tbody-sale"></tbody>
+                        </table>
+
+                        <input type="hidden" name="assign" value="{{ get('assign') }}">
+
+                        <button class="btn btn-primary btn-sm">Pagar</button>
+                    </form>
+                </div>
     		</div>
     	</div>
     </div>
+
+    @include('tickets.passenger-info')
 </x-template-dashboard>

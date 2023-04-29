@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 26, 2023 at 07:04 PM
+-- Generation Time: Apr 28, 2023 at 01:52 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -36,7 +36,7 @@ CREATE TABLE `assign` (
 --
 
 INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `date_create`, `date_update`) VALUES
-(1, '2023-04-26', '6', '1', '2', '2023-04-26 18:44:20', '2023-04-26 18:44:20');
+(1, '2023-04-28', '6', '1', '2', '2023-04-26 18:44:20', '2023-04-28 12:52:54');
 
 -- --------------------------------------------------------
 
@@ -80,7 +80,7 @@ CREATE TABLE `bus_type` (
 --
 
 INSERT INTO `bus_type` (`id`, `type`, `design`, `total_seats`, `seats_number`, `status`, `date_create`, `date_update`) VALUES
-(1, 'Leito ', '2-2', '44', '01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44', 'active', '2023-04-21 11:59:46', '2023-04-21 11:59:46');
+(1, 'Leito ', '2-3', '44', '01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44', 'active', '2023-04-21 11:59:46', '2023-04-27 18:34:06');
 
 -- --------------------------------------------------------
 
@@ -226,7 +226,11 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (49, 'drivers.delete', 'Eliminar conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
 (50, 'drivers.index', 'Ver conductor', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
 (51, 'drivers.create', 'Crear conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
-(52, 'drivers.edit', 'Editar conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
+(52, 'drivers.edit', 'Editar conductor', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(53, 'tickets.delete', 'Eliminar ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(54, 'tickets.index', 'Ver ticket', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
+(55, 'tickets.create', 'Crear ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(56, 'tickets.edit', 'Editar ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
 
 -- --------------------------------------------------------
 
@@ -319,7 +323,11 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (49, 1, 49, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (50, 1, 50, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (51, 1, 51, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(52, 1, 52, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(52, 1, 52, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(53, 1, 53, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(54, 1, 54, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(55, 1, 55, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(56, 1, 56, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -344,6 +352,22 @@ CREATE TABLE `routes` (
 
 INSERT INTO `routes` (`id`, `destination`, `origin`, `status`, `time`, `distance`, `date_create`, `date_update`) VALUES
 (2, 'Caracas', 'Maracaibo', 'active', '12', '700', '2023-04-26 18:18:04', '2023-04-26 18:18:04');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE `tickets` (
+  `id` int(11) NOT NULL,
+  `id_customer` varchar(256) DEFAULT NULL,
+  `id_assign` varchar(256) DEFAULT NULL,
+  `id_sale` varchar(256) DEFAULT NULL,
+  `seat` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -499,6 +523,12 @@ ALTER TABLE `routes`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tickets`
+--
+ALTER TABLE `tickets`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `travels`
 --
 ALTER TABLE `travels`
@@ -568,7 +598,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -580,12 +610,18 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `routes`
 --
 ALTER TABLE `routes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tickets`
+--
+ALTER TABLE `tickets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --

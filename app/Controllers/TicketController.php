@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Assign;
+use App\Models\Customer;
+use App\Models\Ticket;
 
 class TicketController extends Controller
 {
@@ -222,5 +224,33 @@ class TicketController extends Controller
          }
 
         return view('tickets.create', compact('assign', 'html'));
+    }
+
+    public function store()
+    {
+        $id_sale = Ticket::orderByDesc('id')->first()->id_sale ?? 1;
+
+        foreach (request('tickets') as $ticket) {
+            $customer = Customer::updateOrCreate(
+                ['ci' => $ticket['ci']],
+                [
+                    'name' => $ticket['name'],
+                    'date_birth' => $ticket['date_birth'],
+                    'age' => $ticket['age'],
+                    'phone' => $ticket['phone'],
+                    'address' => $ticket['address']
+                ]
+            );
+
+            Ticket::create([
+                'id_customer' => $customer->id,
+                'id_assign' => request('assign'),
+                'id_sale' => $id_sale,
+                'seat' => $ticket['seat'],
+                'status' => 0
+            ]);
+        }
+
+        return redirect("/payments/create?ticket={$id_sale}");
     }
 }

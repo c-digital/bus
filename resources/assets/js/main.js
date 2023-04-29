@@ -8,6 +8,7 @@ function confirmDelete(event, that) {
 }
 
 $(document).ready(function () {
+    i = 0;
 
     if (window.location.href.indexOf('bus-type/edit')) {
         myFunction();
@@ -50,5 +51,66 @@ $(document).ready(function () {
         } else {
             $(menu).show();
         }
+    });
+
+    $('.ChooseSeat').click(function () {
+        seat = $(this).html();
+        seat = seat.replace( /(<([^>]+)>)/ig, '');
+        seat = seat.trim();
+
+        $('[name=seat]').val(seat);
+
+        $('#passenger-info').modal('show');
+    });
+
+    $('#passenger-ci').keyup(function () {
+        ci = $(this).val();
+
+        $.ajax({
+            type: 'POST',
+            url: '/customers/info',
+            data: {
+                ci: ci
+            },
+            success: function (response) {
+                console.log(response);
+                $('#passenger-info').find('[name=name]').val(response.name);
+                $('#passenger-info').find('[name=date_birth]').val(response.date_birth);
+                $('#passenger-info').find('[name=age]').val(response.age);
+                $('#passenger-info').find('[name=phone]').val(response.phone);
+                $('#passenger-info').find('[name=address]').val(response.address);
+            },
+            error: function (error) {
+                console.log(error.responseText);
+            }
+        });
+    });
+
+    $('#passenger-info').find('#save').click(function () {
+        seat = $('#passenger-info').find('[name=seat]').val();
+        ci = $('#passenger-info').find('[name=ci]').val();
+        name = $('#passenger-info').find('[name=name]').val();
+        date_birth = $('#passenger-info').find('[name=date_birth]').val();
+        age = $('#passenger-info').find('[name=age]').val();
+        phone = $('#passenger-info').find('[name=phone]').val();
+        address = $('#passenger-info').find('[name=address]').val();
+
+        $('.tbody-sale').append(`
+            <tr>
+                <td>${name}</td>
+                <td>${ci}</td>
+                <td>${seat}</td>
+
+                <input type="hidden" name="tickets[${i}][seat]" value="${seat}">
+                <input type="hidden" name="tickets[${i}][ci]" value="${ci}">
+                <input type="hidden" name="tickets[${i}][name]" value="${name}">
+                <input type="hidden" name="tickets[${i}][date_birth]" value="${date_birth}">
+                <input type="hidden" name="tickets[${i}][age]" value="${age}">
+                <input type="hidden" name="tickets[${i}][phone]" value="${phone}">
+                <input type="hidden" name="tickets[${i}][address]" value="${address}">
+            </tr>
+        `);
+
+        $('#passenger-info').modal('hide');
     });
 });

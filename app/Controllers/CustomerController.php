@@ -60,4 +60,10 @@ class CustomerController extends Controller
         return redirect('/customers')
             ->with('success', 'Cliente eliminado satisfactoriamente');
     }
+
+    public function info()
+    {
+        $customer = Customer::where('ci', request('ci'))->first();
+        return $customer;
+    }    
 }

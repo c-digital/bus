@@ -49,6 +49,7 @@ $route->resource('/vehicle', VehicleController::class);
 
 // Customers
 $route->resource('/customers', CustomerController::class);
+$route->post('/customers/info', [CustomerController::class, 'info']);
 
 // Assign
 $route->resource('/assign', AssignController::class);
@@ -58,3 +59,6 @@ $route->resource('/drivers', DriverController::class);
 
 // Tickets
 $route->resource('/tickets', TicketController::class);
+
+// Payments
+$route->resource('/payments', PaymentController::class);
