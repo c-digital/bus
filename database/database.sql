@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 28, 2023 at 01:52 PM
+-- Generation Time: May 03, 2023 at 10:55 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -36,7 +36,7 @@ CREATE TABLE `assign` (
 --
 
 INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `date_create`, `date_update`) VALUES
-(1, '2023-04-28', '6', '1', '2', '2023-04-26 18:44:20', '2023-04-28 12:52:54');
+(1, '2023-05-03', '6', '1', '2', '2023-04-26 18:44:20', '2023-05-03 21:58:35');
 
 -- --------------------------------------------------------
 
@@ -148,6 +148,37 @@ CREATE TABLE `customers` (
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `ci`, `date_birth`, `age`, `phone`, `address`, `date_create`, `date_update`) VALUES
+(4, 'Nisa Delgado', '24370873', '1993-01-01', '29', '04246402701', 'Calle 90, Av. 16, Sector Nueva Vía, #16b-37', '2023-04-28 13:37:00', '2023-04-28 13:37:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `methods`
+--
+
+CREATE TABLE `methods` (
+  `id` int(11) NOT NULL,
+  `name` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `methods`
+--
+
+INSERT INTO `methods` (`id`, `name`, `date_create`, `date_update`) VALUES
+(1, 'Efectivo', '2023-05-03 21:51:00', '2023-05-03 21:51:00'),
+(2, 'Transferencia bancaria', '2023-05-03 21:51:00', '2023-05-03 21:51:00'),
+(3, 'Depósito bancario', '2023-05-03 21:51:00', '2023-05-03 21:51:00'),
+(4, 'QR', '2023-05-03 21:51:00', '2023-05-03 21:51:00'),
+(5, 'Cheque', '2023-05-03 21:51:00', '2023-05-03 21:51:00');
+
 -- --------------------------------------------------------
 
 --
@@ -159,6 +190,21 @@ CREATE TABLE `migrations` (
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(11) NOT NULL,
+  `id_sale` varchar(256) DEFAULT NULL,
+  `amount` varchar(256) DEFAULT NULL,
+  `method` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -365,9 +411,17 @@ CREATE TABLE `tickets` (
   `id_assign` varchar(256) DEFAULT NULL,
   `id_sale` varchar(256) DEFAULT NULL,
   `seat` varchar(256) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `seat`, `status`, `date_create`, `date_update`) VALUES
+(6, '4', '1', '1', '03', '0', '2023-05-03 21:59:22', '2023-05-03 21:59:22');
 
 -- --------------------------------------------------------
 
@@ -493,9 +547,21 @@ ALTER TABLE `customers`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `methods`
+--
+ALTER TABLE `methods`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -586,13 +652,25 @@ ALTER TABLE `companies`
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `methods`
+--
+ALTER TABLE `methods`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -622,7 +700,7 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `travels`

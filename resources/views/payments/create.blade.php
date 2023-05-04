@@ -62,4 +62,38 @@
 		    </table>
 		</div>
 	</div>
+
+	<div class="card mt-4 mb-4">
+		<div class="card-body">
+			<h6>
+				Pagos
+			</h6>
+
+			<div class="float-end">
+				<button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#payment">Agregar</button>
+			</div>
+
+			<table class="table table-hover">
+		        <thead>
+		            <tr>
+		                <th>{{ 'Monto' }}</th>
+                        <th>{{ 'Método de pago' }}</th>
+		            </tr>
+		        </thead>
+
+		        <tbody>
+		            @foreach($payments as $payment)
+		            	<tr>
+		            		<td>{{ $payment->amount }}</td>
+                            <td>{{ $payment->method }}</td>
+		            	</tr>
+		            @endforeach
+		        </tbody>
+		    </table>
+		</div>
+	</div>
+
+	@include('payments.payment')
+
+	<button class="btn btn-primary">Procesar venta</button>
 </x-template-dashboard>

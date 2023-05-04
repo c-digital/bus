@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
-class Payment extends Model
+class Method extends Model
 {
     /**
      * The table associated with the model.
      *
      * @var string
      */
-    protected $table = 'payments';
+    protected $table = 'methods';
 
     /**
      * The primary key associated with the table.
@@ -23,5 +23,5 @@ class Payment extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_sale', 'amount', 'method'];
+    protected $fillable = ['name'];
 }
