@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 03, 2023 at 10:55 PM
+-- Generation Time: May 04, 2023 at 09:41 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -36,7 +36,7 @@ CREATE TABLE `assign` (
 --
 
 INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `date_create`, `date_update`) VALUES
-(1, '2023-05-03', '6', '1', '2', '2023-04-26 18:44:20', '2023-05-03 21:58:35');
+(1, '2023-05-04', '6', '1', '2', '2023-04-26 18:44:20', '2023-05-04 20:04:20');
 
 -- --------------------------------------------------------
 
@@ -412,6 +412,7 @@ CREATE TABLE `tickets` (
   `id_sale` varchar(256) DEFAULT NULL,
   `seat` varchar(256) DEFAULT NULL,
   `status` varchar(256) DEFAULT NULL,
+  `amount` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -420,8 +421,9 @@ CREATE TABLE `tickets` (
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `seat`, `status`, `date_create`, `date_update`) VALUES
-(6, '4', '1', '1', '03', '0', '2023-05-03 21:59:22', '2023-05-03 21:59:22');
+INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `seat`, `status`, `amount`, `date_create`, `date_update`) VALUES
+(6, '4', '1', '1', '03', '0', NULL, '2023-05-03 21:59:22', '2023-05-03 21:59:22'),
+(10, '4', '1', '2', '14', '0', NULL, '2023-05-04 20:48:51', '2023-05-04 20:48:51');
 
 -- --------------------------------------------------------
 
@@ -700,7 +702,7 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `travels`

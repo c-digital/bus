@@ -28,7 +28,8 @@ class Ticket extends Model
         'id_assign',
         'id_sale',
         'seat',
-        'status'
+        'status',
+        'amount'
     ];
 
     public function assign()

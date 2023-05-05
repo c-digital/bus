@@ -102,6 +102,8 @@
         }
     </style>
 
+    <x-alert></x-alert>
+
 	<div class="card">
 		<div class="card-header">Info del viaje</div>
 
@@ -154,6 +156,7 @@
                                     <th>Nombre</th>
                                     <th>C.I.</th>
                                     <th>Asiento</th>
+                                    <th>Monto</th>
                                 </tr>
                             </thead>
 
@@ -168,6 +171,8 @@
     		</div>
     	</div>
     </div>
+
+    <input type="hidden" name="price" value="{{ $assign->travel->price }}">
 
     @include('tickets.passenger-info')
 </x-template-dashboard>

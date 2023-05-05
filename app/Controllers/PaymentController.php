@@ -18,7 +18,21 @@ class PaymentController extends Controller
         $tickets = Ticket::where('id_sale', get('ticket'))
             ->get();
 
-        return view('payments.create', compact('methods', 'payments', 'tickets'));
+        $maxAmount = Ticket::where('id_sale', get('ticket'))
+                ->sum('amount');
+
+        if ($payments->count()) {
+            $amountPayments = Payment::where('id_sale', get('ticket'))
+                ->sum('amount');
+
+            $amountTickets = Ticket::where('id_sale', get('ticket'))
+                ->sum('amount');
+
+            $maxAmount = $amountTickets - $amountPayments;
+
+        }
+
+        return view('payments.create', compact('maxAmount', 'methods', 'payments', 'tickets'));
     }
 
     public function store()

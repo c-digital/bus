@@ -58,7 +58,10 @@ $(document).ready(function () {
         seat = seat.replace( /(<([^>]+)>)/ig, '');
         seat = seat.trim();
 
+        price = $('[name=price]').val();
+
         $('[name=seat]').val(seat);
+        $('#passenger-info').find('[name=amount]').val(price);
 
         $('#passenger-info').modal('show');
     });
@@ -94,12 +97,14 @@ $(document).ready(function () {
         age = $('#passenger-info').find('[name=age]').val();
         phone = $('#passenger-info').find('[name=phone]').val();
         address = $('#passenger-info').find('[name=address]').val();
+        amount = $('#passenger-info').find('[name=amount]').val();
 
         $('.tbody-sale').append(`
             <tr>
                 <td>${name}</td>
                 <td>${ci}</td>
                 <td>${seat}</td>
+                <td>${amount}</td>
 
                 <input type="hidden" name="tickets[${i}][seat]" value="${seat}">
                 <input type="hidden" name="tickets[${i}][ci]" value="${ci}">
@@ -108,6 +113,7 @@ $(document).ready(function () {
                 <input type="hidden" name="tickets[${i}][age]" value="${age}">
                 <input type="hidden" name="tickets[${i}][phone]" value="${phone}">
                 <input type="hidden" name="tickets[${i}][address]" value="${address}">
+                <input type="hidden" name="tickets[${i}][amount]" value="${amount}">
             </tr>
         `);
 

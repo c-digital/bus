@@ -12,6 +12,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="amount">Monto</label>
+                    <input type="number" class="form-control" name="amount" required>
+                </div>
+
+                <div class="form-group">
                     <label for="ci">C.I.</label>
                     <input type="text" class="form-control" id="passenger-ci" name="ci" required>
                 </div>

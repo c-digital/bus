@@ -55,7 +55,7 @@
                             <td>{{ $ticket->customer->phone }}</td>
                             <td>{{ $ticket->customer->address }}</td>
                             <td>{{ $ticket->seat }}</td>
-                            <td>{{ $ticket->assign->travel->price }}</td>
+                            <td>{{ $ticket->amount }}</td>
 		            	</tr>
 		            @endforeach
 		        </tbody>
@@ -95,5 +95,8 @@
 
 	@include('payments.payment')
 
-	<button class="btn btn-primary">Procesar venta</button>
+	<form action="/tickets/print" method="POST">
+		<input type="hidden" name="id_sale" value="{{ request('ticket') }}">
+		<button class="btn btn-primary">Procesar venta</button>
+	</form>
 </x-template-dashboard>

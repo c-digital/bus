@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Assign;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Models\Ticket;
 
 class TicketController extends Controller
@@ -28,6 +29,13 @@ class TicketController extends Controller
         $html = "";
 
         $bookArray = [];
+
+        $tickets = Ticket::where('id_assign', get('assign'))->get();
+
+        foreach ($tickets as $ticket) {
+            $bookArray[] = $ticket->seat;
+        }
+        
 
         $rowSeat    = 1;
         $totalSeats = 1;
@@ -228,7 +236,14 @@ class TicketController extends Controller
 
     public function store()
     {
-        $id_sale = Ticket::orderByDesc('id')->first()->id_sale ?? 1;
+        $ticket = Ticket::orderByDesc('id')->first();
+
+        $id_sale = isset($ticket->id_sale) ? $ticket->id_sale + 1 : 1;
+
+        if (! request('tickets')) {
+            return redirect('/tickets/create?assign=' . request('assign'))
+                ->with('error', 'Debe registrar los pasajeros');
+        }
 
         foreach (request('tickets') as $ticket) {
             $customer = Customer::updateOrCreate(
@@ -247,10 +262,39 @@ class TicketController extends Controller
                 'id_assign' => request('assign'),
                 'id_sale' => $id_sale,
                 'seat' => $ticket['seat'],
+                'amount' => $ticket['amount'],
                 'status' => 0
             ]);
         }
 
         return redirect("/payments/create?ticket={$id_sale}");
+    }
+
+    public function print()
+    {
+        $tickets = Ticket::where('id_sale', request('id_sale'))
+            ->get();
+
+        $payments = Payment::where('id_sale', request('id_sale'))
+            ->get();
+
+        if ($payments->count()) {
+            $amountTickets = Ticket::where('id_sale', request('id_sale'))
+                ->sum('amount');
+
+            $amountPayment = Payment::where('id_sale', request('id_sale'))
+                ->sum('amount');
+
+            if ($amountTickets < $amountPayment) {
+                $status = 'Pago parcial';
+            } else {
+                $status = 'Pago completo';
+            }
+
+        } else {
+            $status = 'Reservado';
+        }
+
+        return view('tickets.print', compact('status', 'tickets'));
     }
 }
