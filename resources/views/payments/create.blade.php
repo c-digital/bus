@@ -95,8 +95,9 @@
 
 	@include('payments.payment')
 
-	<form action="/tickets/print" method="POST">
+	<form target="_blank" action="/tickets/print" method="POST">
 		<input type="hidden" name="id_sale" value="{{ request('ticket') }}">
 		<button class="btn btn-primary">Procesar venta</button>
+		<button class="btn btn-primary">Reservar</button>
 	</form>
 </x-template-dashboard>

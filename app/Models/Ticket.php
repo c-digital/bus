@@ -27,6 +27,8 @@ class Ticket extends Model
         'id_customer',
         'id_assign',
         'id_sale',
+        'id_company',
+        'id_sale',
         'seat',
         'status',
         'amount'
@@ -40,5 +42,15 @@ class Ticket extends Model
     public function customer()
     {
         return $this->belongsTo('Customer', 'id_customer');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'id_company');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('User', 'id_user');
     }
 }

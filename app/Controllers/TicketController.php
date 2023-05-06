@@ -261,9 +261,11 @@ class TicketController extends Controller
                 'id_customer' => $customer->id,
                 'id_assign' => request('assign'),
                 'id_sale' => $id_sale,
+                'id_company' => auth()->id_company,
+                'id_user' => auth()->id,
                 'seat' => $ticket['seat'],
                 'amount' => $ticket['amount'],
-                'status' => 0
+                'status' => 0,
             ]);
         }
 
@@ -278,10 +280,10 @@ class TicketController extends Controller
         $payments = Payment::where('id_sale', request('id_sale'))
             ->get();
 
-        if ($payments->count()) {
-            $amountTickets = Ticket::where('id_sale', request('id_sale'))
+        $amountTickets = Ticket::where('id_sale', request('id_sale'))
                 ->sum('amount');
 
+        if ($payments->count()) {
             $amountPayment = Payment::where('id_sale', request('id_sale'))
                 ->sum('amount');
 
@@ -295,6 +297,6 @@ class TicketController extends Controller
             $status = 'Reservado';
         }
 
-        return view('tickets.print', compact('status', 'tickets'));
+        return view('tickets.print', compact('status', 'tickets', 'amountTickets'));
     }
 }
