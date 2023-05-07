@@ -16,6 +16,7 @@
                             <th class="text-left p-2">{{ 'Conductor' }}</th>
                             <th class="text-left p-2">{{ 'Vehiculo' }}</th>
                             <th class="text-left p-2">{{ 'Viaje' }}</th>
+                            <th class="text-left p-2">{{ 'Estado' }}</th>
                             <th class="text-left p-2"></th>
                         </tr>
                     </thead>
@@ -28,7 +29,12 @@
                                 <td class="p-2">{{ $item->driver->name }}</td>
                                 <td class="p-2">{{ $item->vehicle->internal_number . ' - ' . $item->vehicle->type->type . ' - ' . $item->vehicle->plate }}</td>
                                 <td class="p-2">{{ $item->travel->time . ' - ' . $item->travel->route->destination . ' x ' . $item->travel->route->origin }}</td>
+                                <td class="p-2">{{ $item->status }}</td>
                                 <td class="p-2 text-right">
+                                    <a href="/tickets/list?status=Vendido" class="btn btn-success btn-sm">Ver tickets vendidos</a>
+
+                                    <a href="/tickets/list?status=Reservado" class="btn btn-info btn-sm">Ver tickets reservados</a>
+
                                     @if(can('assign.create'))
                                         <a class="hover:text-blue-600 p-1" href="{{ '/assign/edit/' . $item->id }}" title="Editar">
                                             <fa class="fa fa-edit"></fa>

@@ -8,6 +8,11 @@ use App\Models\Travel;
 
 class TravelController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $travels = Travel::get();

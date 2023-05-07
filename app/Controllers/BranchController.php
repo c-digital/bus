@@ -9,6 +9,11 @@ class BranchController extends Controller
 {
     public function __construct()
     {
+        $this->middleware('Auth');
+    }
+    
+    public function __construct()
+    {
         if (auth()->role != 'admin') {
             return abort(401);
         }

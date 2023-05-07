@@ -29,6 +29,7 @@ class Ticket extends Model
         'id_sale',
         'id_company',
         'id_sale',
+        'id_user',
         'seat',
         'status',
         'amount'

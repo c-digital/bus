@@ -35,7 +35,9 @@
 
 		<hr>
 
-		<img width="300px" src="{{ '/resources/assets/img/' . $tickets[0]->company->logo }}" alt="{{ $tickets[0]->company->name }}">
+		@if(isset($tickets[0]->company->logo))
+			<img width="300px" src="{{ '/resources/assets/img/' . $tickets[0]->company->logo }}" alt="{{ $tickets[0]->company->name }}">
+		@endif
 
 		<div class="font-weight-bold">{{ $tickets[0]->company->name }}</div>
 		<div><span class="font-weight-bold">NIT:</span> {{ $tickets[0]->company->nit }}</div>

@@ -29,8 +29,8 @@
                         @foreach($vehicles as $vehicle)
                             <tr class="hover:bg-gray-100">
                                 <td class="p-2 hidden sm:table-cell">{{ $vehicle->id }}</td>
-                                <td class="p-2">{{ $vehicle->type }}</td>
                                 <td class="p-2">{{ $vehicle->internal_number }}</td>
+                                <td class="p-2">{{ $vehicle->type->type }}</td>
                                 <td class="p-2">{{ $vehicle->plate }}</td>
                                 <td class="p-2">{{ $vehicle->year }}</td>
                                 <td class="p-2">{{ $vehicle->model }}</td>

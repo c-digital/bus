@@ -7,6 +7,11 @@ use App\Models\Vehicle;
 
 class VehicleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $vehicles = Vehicle::get();
@@ -39,7 +44,7 @@ class VehicleController extends Controller
     public function edit($id)
     {
         $types = BusType::get();
-        $vehicule = Vehicle::find($id);
+        $vehicle = Vehicle::find($id);
         return view('vehicle.edit', compact('types', 'vehicle'));
     }
 

@@ -118,5 +118,34 @@ $(document).ready(function () {
         `);
 
         $('#passenger-info').modal('hide');
+
+        i++;
+    });
+
+    $('#passenger-info').on('hide.bs.modal', function () {
+        $('#passenger-info').find('[name=seat]').val('');
+        $('#passenger-info').find('[name=ci]').val('');
+        $('#passenger-info').find('[name=name]').val('');
+        $('#passenger-info').find('[name=date_birth]').val('');
+        $('#passenger-info').find('[name=age]').val('');
+        $('#passenger-info').find('[name=phone]').val('');
+        $('#passenger-info').find('[name=address]').val('');
+        $('#passenger-info').find('[name=amount]').val('');
+    });
+
+    $('[name=date_birth').change(function () {
+        date = $(this).val();
+
+        today = new Date();
+        birth = new Date(date);
+
+        age = today.getFullYear() - birth.getFullYear();
+        month = today.getMonth() - birth.getMonth();
+
+        if (month < 0 || (m === 0 && today.getDate() < birth.getDate())) {
+            age--;
+        }
+
+        $('[name=age]').val(age);
     });
 });

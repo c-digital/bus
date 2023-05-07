@@ -6,6 +6,11 @@ use App\Models\BusType;
 
 class BusTypeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $types = BusType::get();
@@ -39,7 +44,7 @@ class BusTypeController extends Controller
     public function update()
     {
         BusType::find(request('id'))
-            ->create([
+            ->update([
                 'type' => request('type'),
                 'design' => request('design'),
                 'total_seats' => request('total_seats'),

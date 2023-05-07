@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="date">Fecha</label>
-                        <input type="date" required name="date" class="form-control">
+                        <input type="date" required name="date" class="form-control" value="{{ $assign->date }}">
                     </div>
 
                     <div class="form-group">

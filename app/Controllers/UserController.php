@@ -75,6 +75,14 @@ class UserController extends Controller
             'extra' => json($extra),
         ]);
 
+        if (request('role') == 'company') {
+            $user->update(['id_company' => $user->id]);
+        }
+
+        if (request('role') != 'company') {
+            $user->update(['id_company' => auth()->id_company]);
+        }
+
         $user->update(['hash' => encrypt($user->id)]);
 
         return redirect('/users')->with('info', lang('users.store'));
@@ -117,6 +125,14 @@ class UserController extends Controller
             'role' => request('role'),
             'extra' => json($extra)
         ]);
+
+        if (request('role') == 'company') {
+            $user->update(['id_company' => $user->id]);
+        }
+
+        if (request('role') != 'company') {
+            $user->update(['id_company' => auth()->id_company]);
+        }
 
         if ($user->id == session('id')) {
             session('name', $user->name);

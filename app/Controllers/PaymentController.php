@@ -8,6 +8,11 @@ use App\Models\Ticket;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function create()
     {
         $methods = Method::get();
@@ -21,18 +26,14 @@ class PaymentController extends Controller
         $maxAmount = Ticket::where('id_sale', get('ticket'))
                 ->sum('amount');
 
+        $amountPayments = 0;
+
         if ($payments->count()) {
             $amountPayments = Payment::where('id_sale', get('ticket'))
                 ->sum('amount');
-
-            $amountTickets = Ticket::where('id_sale', get('ticket'))
-                ->sum('amount');
-
-            $maxAmount = $amountTickets - $amountPayments;
-
         }
 
-        return view('payments.create', compact('maxAmount', 'methods', 'payments', 'tickets'));
+        return view('payments.create', compact('amountPayments', 'maxAmount', 'methods', 'payments', 'tickets'));
     }
 
     public function store()

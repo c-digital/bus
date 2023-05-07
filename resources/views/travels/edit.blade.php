@@ -27,9 +27,9 @@
 
                     <div class="form-group">
                         <label for="stops">Paradas</label>
-                        <select name="stops" multiple class="select2 form-control" required>
+                        <select name="stops[]" multiple class="select2 form-control" required>
                             @foreach($cities as $city)
-                                <option {{ in_array($city->name, json($travel->stops)) ? 'selected' : '' }} value="{{ $city->id }}">{{ $city->name }}</option>
+                                <option {{ in_array($city->name, json($travel->stops)) ? 'selected' : '' }} value="{{ $city->name }}">{{ $city->name }}</option>
                             @endforeach
                         </select>
                     </div>

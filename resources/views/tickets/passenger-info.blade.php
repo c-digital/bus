@@ -8,7 +8,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label for="seat">Asiento</label>
-                    <input type="text" class="form-control" name="seat" required>
+                    <input type="text" readonly class="form-control" name="seat" required>
                 </div>
 
                 <div class="form-group">
@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="age">Edad</label>
-                    <input type="text" class="form-control" name="age">
+                    <input type="text" readonly class="form-control" name="age">
                 </div>
 
                 <div class="form-group">

@@ -6,6 +6,11 @@ use App\Models\City;
 
 class CityController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+
     public function index()
     {
         $cities = City::get();

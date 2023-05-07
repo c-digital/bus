@@ -6,6 +6,11 @@ use App\Models\Customer;
 
 class CustomerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $customers = Customer::get();

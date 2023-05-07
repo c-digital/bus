@@ -35,7 +35,7 @@
                                 @endif
 
                                 @if(can('bus-type.create'))
-                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/bus-type/' . $type->id }}" title="Eliminar">
+                                    <a onclick="confirmDelete(event, this)" class="hover:text-red-600 p-1" href="{{ '/bus-type/delete/' . $type->id }}" title="Eliminar">
                                         <fa class="fa fa-trash"></fa>
                                     </a>
                                 @endif

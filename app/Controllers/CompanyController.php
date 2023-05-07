@@ -7,6 +7,11 @@ use App\Models\User;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         if (auth()->role != 'admin') {

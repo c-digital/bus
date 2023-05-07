@@ -16,7 +16,7 @@
                         <label for="type">Tipo</label>
                         <select name="type" class="form-control" required>
                             @foreach($types as $type)
-                                <option {{ $type->id == $vehicle->type ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->type }}</option>
+                                <option {{ $type->id == $vehicle->type->type ? 'selected' : '' }} value="{{ $type->id }}">{{ $type->type }}</option>
                             @endforeach
                         </select>
                     </div>

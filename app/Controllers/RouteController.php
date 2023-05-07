@@ -7,6 +7,11 @@ use App\Models\Route;
 
 class RouteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $routes = Route::get();

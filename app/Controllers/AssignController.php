@@ -9,6 +9,11 @@ use App\Models\User;
 
 class AssignController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $assign = Assign::get();
@@ -44,7 +49,8 @@ class AssignController extends Controller
             'date' => request('date'),
             'id_driver' => request('driver'),
             'id_vehicle' => request('vehicle'),
-            'id_travel' => request('travel')
+            'id_travel' => request('travel'),
+            'status' => 'No iniciado',
         ]);
 
         return redirect('/assign')
@@ -69,10 +75,10 @@ class AssignController extends Controller
 
         $travel = Travel::find(request('travel'));
 
-        if (! in_array($day, $travel->days)) {
+        if (! in_array($day, json($travel->days))) {
             $error = "No puede crear una asignación para el viaje '{$travel->name}' en día {$day}.";
 
-            return redirect('/assign/create')
+            return redirect('/assign/edit/' . request('id'))
                 ->with('error', $error);
         }
         
@@ -81,7 +87,8 @@ class AssignController extends Controller
             'date' => request('date'),
             'id_driver' => request('driver'),
             'id_vehicle' => request('vehicle'),
-            'id_travel' => request('travel')
+            'id_travel' => request('travel'),
+            'status' => 'No iniciado',
         ]);
 
         return redirect('/assign')

@@ -1,7 +1,7 @@
 <x-template-dashboard active="payments" title="Reportar pagos">
 	<div class="card">
 		<div class="card-body">
-			<h6>Info del viaje</h6>
+			<h6>Viaje</h6>
 
 			<table class="table table-hover">
 		        <thead>
@@ -29,7 +29,7 @@
 
 	<div class="card mt-4">
 		<div class="card-body">
-			<h6>Info de los pasajeros</h6>
+			<h6>Pasajeros</h6>
 
 			<table class="table table-hover">
 		        <thead>
@@ -55,7 +55,7 @@
                             <td>{{ $ticket->customer->phone }}</td>
                             <td>{{ $ticket->customer->address }}</td>
                             <td>{{ $ticket->seat }}</td>
-                            <td>{{ $ticket->amount }}</td>
+                            <td>{{ number_format($ticket->amount, 2) }}</td>
 		            	</tr>
 		            @endforeach
 		        </tbody>
@@ -74,20 +74,32 @@
 			</div>
 
 			<table class="table table-hover">
-		        <thead>
-		            <tr>
-		                <th>{{ 'Monto' }}</th>
-                        <th>{{ 'Método de pago' }}</th>
-		            </tr>
-		        </thead>
-
 		        <tbody>
+		        	<tr>
+		        		<th>Monto total</th>
+		        		<td>{{ number_format($maxAmount, 2) }}</td>
+		        	</tr>
+
 		            @foreach($payments as $payment)
 		            	<tr>
-		            		<td>{{ $payment->amount }}</td>
-                            <td>{{ $payment->method }}</td>
+		            		<th>{{ $payment->method }}</th>
+		            		<td>{{ number_format($payment->amount, 2) }}</td>
 		            	</tr>
 		            @endforeach
+
+		            @if($payments->count())
+			            <tr>
+			        		<th>Monto pagado</th>
+			        		<td>{{ number_format($amountPayments, 2) }}</td>
+			        	</tr>
+		        	@endif
+
+		        	@if($payments->count() && $maxAmount > $amountPayments)
+			            <tr>
+			        		<th>Restante</th>
+			        		<td>{{ number_format($maxAmount - $amountPayments, 2) }}</td>
+			        	</tr>
+		        	@endif
 		        </tbody>
 		    </table>
 		</div>

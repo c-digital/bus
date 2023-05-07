@@ -7,6 +7,11 @@ use DB;
 
 class RoleController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
         $roles = Role::get();

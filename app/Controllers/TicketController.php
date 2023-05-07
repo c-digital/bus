@@ -9,10 +9,20 @@ use App\Models\Ticket;
 
 class TicketController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('Auth');
+    }
+    
     public function index()
     {
-        $assign = Assign::where('date', '>=', now('Y-m-d'))
+        $assign = Assign::where('date', now('Y-m-d'))
             ->get();
+
+        if (get('date')) {
+            $assign = Assign::where('date', get('date'))
+                ->get();
+        }
 
         return view('tickets.index', compact('assign'));
     }
@@ -246,16 +256,27 @@ class TicketController extends Controller
         }
 
         foreach (request('tickets') as $ticket) {
-            $customer = Customer::updateOrCreate(
-                ['ci' => $ticket['ci']],
-                [
+            $customer = Customer::where('ci', $ticket['ci'])->first();
+
+            if ($customer) {
+                $customer->update([
+                    'ci' => $ticket['ci'],
                     'name' => $ticket['name'],
                     'date_birth' => $ticket['date_birth'],
                     'age' => $ticket['age'],
                     'phone' => $ticket['phone'],
                     'address' => $ticket['address']
-                ]
-            );
+                ]);
+            } else {
+                $customer = new Customer();
+                $customer->ci = $ticket['ci'];
+                $customer->name = $ticket['name'];
+                $customer->date_birth = $ticket['date_birth'];
+                $customer->age = $ticket['age'];
+                $customer->phone = $ticket['phone'];
+                $customer->address = $ticket['address'];
+                $customer->save();
+            }
 
             Ticket::create([
                 'id_customer' => $customer->id,
@@ -297,6 +318,6 @@ class TicketController extends Controller
             $status = 'Reservado';
         }
 
-        return view('tickets.print', compact('status', 'tickets', 'amountTickets'));
+        return view('tickets.print', compact('amountPayment', 'status', 'tickets', 'amountTickets', 'payments'));
     }
 }

@@ -2,6 +2,22 @@
     <div class="w-full p-3">
         <x-alert></x-alert>
 
+        <form>
+            <div class="row">
+                <div class="col-1">
+                    <label for="date">Fecha</label>
+                </div>
+
+                <div class="col-2">
+                    <input type="date" name="date" class="form-control form-control-sm" required value="{{ get('date') ?? now('Y-m-d') }}">
+                </div>
+
+                <div class="col-1">
+                    <input type="submit" class="btn btn-primary btn-sm" value="Filtrar">
+                </div>
+            </div>
+        </form>
+
         <div class="bg-white border rounded shadow p-3 text-lg">
             <div class="table-responsive">
                 <table id="table" class="table table-hover w-full">
