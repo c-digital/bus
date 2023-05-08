@@ -60,6 +60,7 @@ $route->resource('/drivers', DriverController::class);
 // Tickets
 $route->resource('/tickets', TicketController::class);
 $route->match(['post', 'get'], '/tickets/print', [TicketController::class, 'print']);
+$route->get('/tickets/list/{id}', [TicketController::class, 'list']);
 
 // Payments
 $route->resource('/payments', PaymentController::class);

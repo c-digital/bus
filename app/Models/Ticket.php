@@ -54,4 +54,9 @@ class Ticket extends Model
     {
         return $this->belongsTo('User', 'id_user');
     }
+
+    public function payments()
+    {
+        return $this->hasMany('Payment', 'id_sale', 'id_sale');
+    }
 }

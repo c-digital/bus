@@ -320,4 +320,23 @@ class TicketController extends Controller
 
         return view('tickets.print', compact('amountPayment', 'status', 'tickets', 'amountTickets', 'payments'));
     }
+
+    public function list($id)
+    {
+        $assign = Assign::find($id);
+
+        if (get('status') == 'Vendido') {
+            $tickets = Ticket::where('id_assign', $id)
+                ->has('payments')
+                ->get();
+        }
+
+        if (get('status') == 'Reservado') {
+            $tickets = Ticket::where('id_assign', $id)
+                ->doesntHave('payments')
+                ->get();
+        }
+
+        return view('tickets.list', compact('assign', 'tickets'));
+    }
 }
