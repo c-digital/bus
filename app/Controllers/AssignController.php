@@ -69,6 +69,14 @@ class AssignController extends Controller
 
     public function update()
     {
+        if (get('status')) {
+            Assign::find(request('id'))
+                ->update(['status' => request('post')]);
+
+            return redirect('/assign')
+                ->with('success', 'Estado de asignación cambiado satisfactoriamente');
+        }
+
         $day = carbon()
             ->parse(request('date'))
             ->format('l');

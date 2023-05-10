@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 07, 2023 at 04:49 PM
+-- Generation Time: May 08, 2023 at 06:27 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -28,6 +28,8 @@ CREATE TABLE `assign` (
   `id_vehicle` varchar(256) DEFAULT NULL,
   `id_travel` varchar(256) DEFAULT NULL,
   `status` varchar(256) DEFAULT NULL,
+  `start` varchar(256) DEFAULT NULL,
+  `end` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -36,8 +38,8 @@ CREATE TABLE `assign` (
 -- Dumping data for table `assign`
 --
 
-INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `status`, `date_create`, `date_update`) VALUES
-(1, '2023-05-06', '6', '1', '2', NULL, '2023-04-26 18:44:20', '2023-05-06 12:41:23');
+INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `status`, `start`, `end`, `date_create`, `date_update`) VALUES
+(1, '2023-05-06', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-04-26 18:44:20', '2023-05-07 16:51:32');
 
 -- --------------------------------------------------------
 
@@ -82,6 +84,26 @@ CREATE TABLE `bus_type` (
 
 INSERT INTO `bus_type` (`id`, `type`, `design`, `total_seats`, `seats_number`, `status`, `date_create`, `date_update`) VALUES
 (1, 'Leito ', '2-3', '44', '01,02,03,04,05,06,07,08,09,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44', 'active', '2023-04-21 11:59:46', '2023-04-27 18:34:06');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cash`
+--
+
+CREATE TABLE `cash` (
+  `id` int(11) NOT NULL,
+  `id_company` varchar(256) DEFAULT NULL,
+  `date` varchar(256) DEFAULT NULL,
+  `method` varchar(256) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `amount` varchar(256) DEFAULT NULL,
+  `type` varchar(256) DEFAULT NULL,
+  `balance` varchar(256) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -295,7 +317,11 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (53, 'tickets.delete', 'Eliminar ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
 (54, 'tickets.index', 'Ver ticket', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
 (55, 'tickets.create', 'Crear ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
-(56, 'tickets.edit', 'Editar ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25');
+(56, 'tickets.edit', 'Editar ticket', '2023-04-13 19:31:31', '2023-04-17 18:27:25'),
+(57, 'cash.index', 'Ver caja', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
+(58, 'cash.create', 'Crear caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(59, 'cash.edit', 'Editar caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(60, 'cash.delete', 'Eliminar caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04');
 
 -- --------------------------------------------------------
 
@@ -392,7 +418,11 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (53, 1, 53, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (54, 1, 54, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (55, 1, 55, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(56, 1, 56, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(56, 1, 56, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(57, 1, 57, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(58, 1, 58, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(59, 1, 59, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(60, 1, 60, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -444,23 +474,10 @@ CREATE TABLE `tickets` (
 
 INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `id_company`, `id_user`, `seat`, `status`, `amount`, `date_create`, `date_update`) VALUES
 (13, '4', '1', '1', '3', '1', '05', '0', '80', '2023-05-05 15:06:06', '2023-05-05 15:43:33'),
-(14, '5', '1', '2', '3', '1', '02', '0', '80', '2023-05-05 20:12:37', '2023-05-06 19:47:21'),
-(15, '6', '1', '3', '3', '1', '04', '0', '80', '2023-05-06 12:46:59', '2023-05-06 19:47:21'),
 (16, '4', '1', '4', '3', '1', '13', '0', '80', '2023-05-06 12:50:31', '2023-05-06 19:47:21'),
 (17, '4', '1', '5', '3', '1', '20', '0', '80', '2023-05-06 12:51:35', '2023-05-06 19:47:21'),
-(18, '7', '1', '6', '3', '1', '10', '0', '80', '2023-05-06 12:53:02', '2023-05-06 19:47:21'),
 (19, '4', '1', '7', '3', '1', '25', '0', '80', '2023-05-06 12:53:56', '2023-05-06 19:47:21'),
-(20, '8', '1', '8', '3', '1', '15', '0', '80', '2023-05-06 12:55:13', '2023-05-06 19:47:21'),
-(21, '9', '1', '9', '3', '1', '09', '0', '80', '2023-05-06 12:57:08', '2023-05-06 19:47:21'),
-(22, '10', '1', '10', '3', '1', '03', '0', '80', '2023-05-06 12:59:35', '2023-05-06 19:47:21'),
-(23, '11', '1', '11', '3', '1', '01', '0', '80', '2023-05-06 14:06:56', '2023-05-06 19:47:21'),
-(24, '12', '1', '12', '3', '1', '01', '0', '80', '2023-05-06 14:07:00', '2023-05-06 19:47:21'),
 (25, '4', '1', '13', '3', '1', '14', '0', '80', '2023-05-06 14:37:51', '2023-05-06 19:47:21'),
-(26, '13', '1', '14', '3', '1', '08', '0', '80', '2023-05-06 14:47:04', '2023-05-06 19:47:22'),
-(27, '14', '1', '15', '3', '1', '07', '0', '80', '2023-05-06 14:49:51', '2023-05-06 19:47:22'),
-(28, '16', '1', '16', '3', '1', '19', '0', '80', '2023-05-06 15:34:04', '2023-05-06 19:47:22'),
-(29, '17', '1', '17', '3', '1', '12', '0', '80', '2023-05-06 15:48:29', '2023-05-06 19:47:22'),
-(30, '18', '1', '18', '3', '1', '17', '0', '80', '2023-05-06 15:51:49', '2023-05-06 19:47:22'),
 (31, '22', '1', '19', '3', '1', '22', '0', '80', '2023-05-06 15:56:11', '2023-05-06 19:47:22'),
 (32, '23', '1', '20', '3', '1', '06', '0', '80', '2023-05-06 19:16:46', '2023-05-06 19:47:22'),
 (33, '4', '1', '21', '3', '1', '32', '0', '80', '2023-05-06 19:58:03', '2023-05-06 19:58:03'),
@@ -572,6 +589,12 @@ ALTER TABLE `bus_type`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `cash`
+--
+ALTER TABLE `cash`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cities`
 --
 ALTER TABLE `cities`
@@ -680,6 +703,12 @@ ALTER TABLE `bus_type`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `cash`
+--
+ALTER TABLE `cash`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
@@ -719,7 +748,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -731,7 +760,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `routes`

@@ -10,6 +10,24 @@ function confirmDelete(event, that) {
 $(document).ready(function () {
     i = 0;
 
+    $('.start-container').hide();
+    $('.end-container').hide();
+
+    $('[name=status]').change(function () {
+        status = $(this).val();
+
+        $('.start-container').hide();
+        $('.end-container').hide();
+
+        if (status == 'Iniciado') {
+            $('.start-container').show();
+        }
+
+        if (status == 'Finalizado') {
+            $('.end-container').show();
+        }
+    });
+
     if (window.location.href.indexOf('bus-type/edit')) {
         myFunction();
     }

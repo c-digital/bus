@@ -62,5 +62,8 @@ $route->resource('/tickets', TicketController::class);
 $route->match(['post', 'get'], '/tickets/print', [TicketController::class, 'print']);
 $route->get('/tickets/list/{id}', [TicketController::class, 'list']);
 
+// Cash
+$route->resource('/cash', CashController::class);
+
 // Payments
 $route->resource('/payments', PaymentController::class);

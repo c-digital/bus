@@ -261,6 +261,17 @@
             </a>
           </li>
         @endif
+
+        @if(can('cash.index'))
+          <li class="nav-item">
+            <a class="nav-link {{ $active == 'cash' ? 'active' : '' }}" href="/cash">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-money-bill"></i>
+              </div>
+              <span class="nav-link-text ms-1">Caja</span>
+            </a>
+          </li>
+        @endif
       </ul>
     </div>
   </aside>
