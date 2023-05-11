@@ -33,7 +33,7 @@ class TravelController extends Controller
             'time' => request('time'),
             'days' => json(request('days')),
             'status' => request('status'),
-            'stops' => request('stops'),
+            'stops' => json(request('stops')),
             'id_route' => request('route'),
             'price' => request('price'),
         ]);

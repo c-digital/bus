@@ -34,6 +34,7 @@ class User extends Model
         'hash',
         'two_fa',
         'extra',
+        'cash_last_close',
         'date_create',
         'date_update'
     ];

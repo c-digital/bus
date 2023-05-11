@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="time">Hora</label>
-                        <input type="text" required name="time" class="form-control">
+                        <input type="time" required name="time" class="form-control">
                     </div>
 
                     <div class="form-group">

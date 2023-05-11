@@ -11,7 +11,7 @@ class CashController extends Controller
     {
         $this->middleware('Auth');
 
-        $last = Cash::where('id_company', auth()->id_company)
+        $last = Cash::where('id_user', auth()->id)
             ->orderByDesc('id')
             ->first();
 
@@ -23,7 +23,8 @@ class CashController extends Controller
     {
         $methods = Method::get();
 
-        $cash = Cash::where('id_company', auth()->id_company)
+        $cash = Cash::where('id_user', auth()->id)
+            ->where('date_create', '>', auth()->cash_last_close)
             ->get();
 
         $income = $cash->where('type', 'Entrada')->sum('amount');
@@ -39,6 +40,7 @@ class CashController extends Controller
         if (request('open')) {
             Cash::create([
                 'id_company' => auth()->id_company,
+                'id_user' => auth()->id,
                 'date' => now('Y-m-d'),
                 'method' => 'Efectivo',
                 'description' => 'Apertura de caja',
@@ -55,6 +57,7 @@ class CashController extends Controller
         if (request('close')) {
             Cash::create([
                 'id_company' => auth()->id_company,
+                'id_user' => auth()->id,
                 'date' => now('Y-m-d'),
                 'method' => 'Efectivo',
                 'description' => 'Cierre de caja',
@@ -63,6 +66,10 @@ class CashController extends Controller
                 'balance' => 0,
                 'status' => 'Cerrada'
             ]);
+
+            session('cash_last_close', auth()->cash_last_close);
+
+            User::find(auth()->id)->update(['cash_last_close' => now('Y-m-d h:i:s')]);
 
             return redirect('/cash')
                 ->with('info', 'Caja cerrada correctamente');
@@ -79,6 +86,7 @@ class CashController extends Controller
 
             Cash::create([
                 'id_company' => auth()->id_company,
+                'id_user' => auth()->id,
                 'date' => now('Y-m-d'),
                 'method' => request('method'),
                 'description' => request('description'),
@@ -96,10 +104,16 @@ class CashController extends Controller
             ->with('info', 'No puede agregar movimientos porque la caja está cerrada');    
     }
 
-    public function show($id)
+    public function show($id = '')
     {
         if (request('close')) {
-            return return view('cash.close');
+            $cash = Cash::where('id_user', auth()->id_user)
+                ->where('date_create', '>=', session('cash_last_close'))
+                ->get();
+
+            $methods = Method::get();
+
+            return view('cash.close', compact('methods', 'cash'));
         }
 
         $cash = Cash::find($id);

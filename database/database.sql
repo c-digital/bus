@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 08, 2023 at 06:27 PM
+-- Generation Time: May 10, 2023 at 05:27 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -94,6 +94,7 @@ INSERT INTO `bus_type` (`id`, `type`, `design`, `total_seats`, `seats_number`, `
 CREATE TABLE `cash` (
   `id` int(11) NOT NULL,
   `id_company` varchar(256) DEFAULT NULL,
+  `id_user` varchar(256) DEFAULT NULL,
   `date` varchar(256) DEFAULT NULL,
   `method` varchar(256) DEFAULT NULL,
   `description` varchar(256) DEFAULT NULL,
@@ -104,6 +105,13 @@ CREATE TABLE `cash` (
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `cash`
+--
+
+INSERT INTO `cash` (`id`, `id_company`, `id_user`, `date`, `method`, `description`, `amount`, `type`, `balance`, `status`, `date_create`, `date_update`) VALUES
+(1, '3', '1', '2023-05-08', 'Efectivo', 'Apertura de caja', '100', 'Entrada', '100', 'Abierta', '2023-05-08 18:56:07', '2023-05-10 17:13:58');
 
 -- --------------------------------------------------------
 
@@ -525,6 +533,7 @@ CREATE TABLE `users` (
   `oauth` varchar(256) DEFAULT NULL,
   `hash` varchar(256) DEFAULT NULL,
   `extra` text,
+  `cash_last_close` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -533,10 +542,10 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `role`, `oauth`, `hash`, `extra`, `date_create`, `date_update`) VALUES
-(1, NULL, 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '3', 'admin', NULL, 'c4ca4238a0b923820dcc509a6f75849b', NULL, '2023-04-11 17:18:41', '2023-05-06 19:45:58'),
-(4, NULL, 'Rasth', 'nisadelgado@gmail.com', 'd7b90bfe586df34ce1727d9d26e9aee4', '3', 'company', NULL, NULL, NULL, '2023-04-17 20:18:50', '2023-04-17 20:20:48'),
-(6, NULL, 'Conductor 1', 'conductor@grupounebus.com', '202cb962ac59075b964b07152d234b70', '', 'driver', NULL, '1679091c5a880faf6fb5e6087eb1b2dc', '{\"name\":\"Conductor 1\",\"license\":\"123\",\"driver_license\":\"123\",\"phone\":\"123\",\"address\":\"123\",\"photo\":\"cpvDS0KU_400x400.jpg\"}', '2023-04-26 18:15:22', '2023-04-26 18:15:22');
+INSERT INTO `users` (`id`, `photo`, `name`, `email`, `password`, `id_company`, `role`, `oauth`, `hash`, `extra`, `cash_last_close`, `date_create`, `date_update`) VALUES
+(1, NULL, 'Administrador', 'admin@admin.com', '21232f297a57a5a743894a0e4a801fc3', '3', 'admin', NULL, 'c4ca4238a0b923820dcc509a6f75849b', NULL, '2023-05-08 18:00:07', '2023-04-11 17:18:41', '2023-05-10 17:24:50'),
+(4, NULL, 'Rasth', 'nisadelgado@gmail.com', 'd7b90bfe586df34ce1727d9d26e9aee4', '3', 'company', NULL, NULL, NULL, NULL, '2023-04-17 20:18:50', '2023-04-17 20:20:48'),
+(6, NULL, 'Conductor 1', 'conductor@grupounebus.com', '202cb962ac59075b964b07152d234b70', '', 'driver', NULL, '1679091c5a880faf6fb5e6087eb1b2dc', '{\"name\":\"Conductor 1\",\"license\":\"123\",\"driver_license\":\"123\",\"phone\":\"123\",\"address\":\"123\",\"photo\":\"cpvDS0KU_400x400.jpg\"}', NULL, '2023-04-26 18:15:22', '2023-04-26 18:15:22');
 
 -- --------------------------------------------------------
 
@@ -706,7 +715,7 @@ ALTER TABLE `bus_type`
 -- AUTO_INCREMENT for table `cash`
 --
 ALTER TABLE `cash`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `cities`

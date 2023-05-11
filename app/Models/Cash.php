@@ -25,6 +25,7 @@ class Cash extends Model
      */
     protected $fillable = [
         'id_company',
+        'id_user',
         'date',
         'method',
         'description',
