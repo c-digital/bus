@@ -38,10 +38,36 @@ class PaymentController extends Controller
 
     public function store()
     {
+        $last = Cash::where('id_user', auth()->id)
+            ->orderByDesc('id')
+            ->first();
+
+        $this->balance = isset($last->balance) ? $last->balance : 0;
+        $this->status = isset($last->status) ? $last->status : 'Cerrada';
+
+        if ($this->status == 'Cerrada') {
+            return redirect('/payments/create?ticket=' . request('id_sale'))
+                ->with('info', 'No puede agregar pagos porque la caja está cerrada.');
+        }
+
         Payment::create([
             'id_sale' => request('id_sale'),
             'amount' => request('amount'),
             'method' => request('method'),
+        ]);
+
+        $balance = $this->balance + request('amount');
+
+        Cash::create([
+            'id_company' => auth()->id_company,
+            'id_user' => auth()->id,
+            'date' => now('Y-m-d'),
+            'method' => request('method'),
+            'description' => 'Pago de venta ' . request('id_sale'),
+            'amount' => request('amount'),
+            'type' => 'Entrada',
+            'balance' => $balance,
+            'status' => 'Abierta'
         ]);
 
         return redirect('/payments/create?ticket=' . request('id_sale'));

@@ -8,6 +8,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
+                        <label for="company">Compañía</label>
+                        <select name="company" required class="form-control">
+                            <option value=""></option>
+                            @foreach($companies as $company)
+                                <option {{ $company->id == $travel->id_company ? 'selected' : '' }} value="{{ $company->id }}">{{ $company->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="time">Hora</label>
                         <input type="time" required value="{{ $travel->time }}" name="time" class="form-control">
                     </div>

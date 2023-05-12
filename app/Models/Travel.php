@@ -23,11 +23,16 @@ class Travel extends Model
      *
      * @var array
      */
-    protected $fillable = ['time', 'days', 'status', 'stops', 'id_route', 'price'];
+    protected $fillable = ['time', 'days', 'status', 'stops', 'id_route', 'id_company', 'price'];
 
     public function route()
     {
         return $this->belongsTo('Route', 'id_route');
+    }
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'id_company');
     }
 
     public function getNameAttribute()

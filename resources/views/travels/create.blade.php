@@ -6,6 +6,16 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
+                        <label for="company">Compañía</label>
+                        <select name="company" required class="form-control">
+                            <option value=""></option>
+                            @foreach($companies as $company)
+                                <option value="{{ $company->id }}">{{ $company->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
                         <label for="time">Hora</label>
                         <input type="time" required name="time" class="form-control">
                     </div>

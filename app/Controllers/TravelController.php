@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\City;
+use App\Models\Company;
 use App\Models\Route;
 use App\Models\Travel;
 
@@ -21,10 +22,11 @@ class TravelController extends Controller
 
     public function create()
     {
+        $companies = Company::get();
         $cities = City::get();
         $routes = Route::get();
 
-        return view('travels.create', compact('cities', 'routes'));
+        return view('travels.create', compact('companies', 'cities', 'routes'));
     }
 
     public function store()
@@ -35,6 +37,7 @@ class TravelController extends Controller
             'status' => request('status'),
             'stops' => json(request('stops')),
             'id_route' => request('route'),
+            'id_company' => request('company'),
             'price' => request('price'),
         ]);
 
@@ -45,10 +48,10 @@ class TravelController extends Controller
     {
         $cities = City::get();
         $routes = Route::get();
-
+        $companies = Company::get();
         $travel = Travel::find($id);
         
-        return view('travels.edit', compact('cities', 'routes', 'travel'));
+        return view('travels.edit', compact('companies', 'cities', 'routes', 'travel'));
     }
 
     public function update()
@@ -60,6 +63,7 @@ class TravelController extends Controller
                 'status' => request('status'),
                 'stops' => request('stops'),
                 'id_route' => request('route'),
+                'id_company' => request('company'),
                 'price' => request('price'),
             ]);
 

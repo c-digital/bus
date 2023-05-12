@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 10, 2023 at 05:27 PM
+-- Generation Time: May 11, 2023 at 09:16 AM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -39,7 +39,9 @@ CREATE TABLE `assign` (
 --
 
 INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `status`, `start`, `end`, `date_create`, `date_update`) VALUES
-(1, '2023-05-06', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-04-26 18:44:20', '2023-05-07 16:51:32');
+(1, '2023-05-06', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-04-26 18:44:20', '2023-05-07 16:51:32'),
+(2, '2023-05-22', '6', '1', '4', 'No iniciado', NULL, NULL, '2023-05-10 21:50:00', '2023-05-10 21:50:00'),
+(3, '2023-05-11', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-05-10 21:50:23', '2023-05-11 07:51:43');
 
 -- --------------------------------------------------------
 
@@ -253,7 +255,10 @@ INSERT INTO `payments` (`id`, `id_sale`, `amount`, `method`, `date_create`, `dat
 (13, '20', '60', 'Efectivo', '2023-05-06 19:18:27', '2023-05-06 19:18:27'),
 (14, '20', '20', 'QR', '2023-05-06 19:18:45', '2023-05-06 19:18:45'),
 (15, '22', '50', 'Efectivo', '2023-05-06 20:37:47', '2023-05-06 20:37:47'),
-(16, '22', '30', 'Transferencia bancaria', '2023-05-06 20:38:09', '2023-05-06 20:38:09');
+(16, '22', '30', 'Transferencia bancaria', '2023-05-06 20:38:09', '2023-05-06 20:38:09'),
+(17, '23', '50', 'Efectivo', '2023-05-10 22:05:42', '2023-05-10 22:05:42'),
+(18, '23', '35', 'Transferencia bancaria', '2023-05-10 22:06:07', '2023-05-10 22:06:07'),
+(19, '24', '160', 'Efectivo', '2023-05-10 22:16:12', '2023-05-10 22:16:12');
 
 -- --------------------------------------------------------
 
@@ -489,7 +494,10 @@ INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `id_company`
 (31, '22', '1', '19', '3', '1', '22', '0', '80', '2023-05-06 15:56:11', '2023-05-06 19:47:22'),
 (32, '23', '1', '20', '3', '1', '06', '0', '80', '2023-05-06 19:16:46', '2023-05-06 19:47:22'),
 (33, '4', '1', '21', '3', '1', '32', '0', '80', '2023-05-06 19:58:03', '2023-05-06 19:58:03'),
-(34, '24', '1', '22', '3', '1', '11', '0', '80', '2023-05-06 20:19:05', '2023-05-06 20:19:05');
+(34, '24', '1', '22', '3', '1', '11', '0', '80', '2023-05-06 20:19:05', '2023-05-06 20:19:05'),
+(35, '23', '3', '23', '3', '1', '01', '0', '80', '2023-05-10 21:56:52', '2023-05-10 21:56:52'),
+(36, '24', '3', '24', '3', '1', '02', '0', '80', '2023-05-10 22:15:39', '2023-05-10 22:15:39'),
+(37, '4', '3', '24', '3', '1', '03', '0', '80', '2023-05-10 22:15:39', '2023-05-10 22:15:39');
 
 -- --------------------------------------------------------
 
@@ -504,6 +512,7 @@ CREATE TABLE `travels` (
   `status` varchar(256) DEFAULT NULL,
   `stops` varchar(256) DEFAULT NULL,
   `id_route` varchar(256) DEFAULT NULL,
+  `id_company` varchar(256) DEFAULT NULL,
   `price` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -513,8 +522,10 @@ CREATE TABLE `travels` (
 -- Dumping data for table `travels`
 --
 
-INSERT INTO `travels` (`id`, `time`, `days`, `status`, `stops`, `id_route`, `price`, `date_create`, `date_update`) VALUES
-(2, '12', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"]', 'active', '[\"Barquisimeto\"]', '2', '80', '2023-04-26 18:19:26', '2023-05-06 13:23:34');
+INSERT INTO `travels` (`id`, `time`, `days`, `status`, `stops`, `id_route`, `id_company`, `price`, `date_create`, `date_update`) VALUES
+(2, '12', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"]', 'active', '[\"Barquisimeto\"]', '2', '3', '80', '2023-04-26 18:19:26', '2023-05-11 08:17:20'),
+(3, '12', '[\"monday\"]', 'active', '[\"Maracaibo\"]', '2', '3', '100', '2023-05-10 21:37:03', '2023-05-11 08:17:21'),
+(4, '22:00', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\",\"saturday\",\"sunday\"]', 'active', '[\"Maracaibo\",\"Caracas\",\"Barquisimeto\"]', '2', '3', '150', '2023-05-10 21:46:38', '2023-05-11 08:17:21');
 
 -- --------------------------------------------------------
 
@@ -697,7 +708,7 @@ ALTER TABLE `vehicles`
 -- AUTO_INCREMENT for table `assign`
 --
 ALTER TABLE `assign`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `branch`
@@ -751,7 +762,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `permissions`
@@ -781,13 +792,13 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `travels`
 --
 ALTER TABLE `travels`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `users`

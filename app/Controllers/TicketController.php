@@ -308,7 +308,7 @@ class TicketController extends Controller
             $amountPayment = Payment::where('id_sale', request('id_sale'))
                 ->sum('amount');
 
-            if ($amountTickets < $amountPayment) {
+            if ($amountTickets > $amountPayment) {
                 $status = 'Pago parcial';
             } else {
                 $status = 'Pago completo';

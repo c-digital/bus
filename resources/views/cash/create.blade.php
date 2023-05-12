@@ -10,13 +10,18 @@
             
                 <div class="modal-body">
                     <div class="form-group">
-                    <label for="method">Método de pago</label>
-                    <select name="method" required class="form-control">
-                        <option value=""></option>
-                        @foreach($methods as $method)
-                            <option value="{{ $method->name }}">{{ $method->name }}</option>
-                        @endforeach
-                    </select>
+                        <label for="method">Método de pago</label>
+                        <select name="method" required class="form-control">
+                            <option value=""></option>
+                            @foreach($methods as $method)
+                                <option value="{{ $method->name }}">{{ $method->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="amount">Monto</label>
+                        <input type="number" class="form-control" required name="amount">
                     </div>
                 </div>
 

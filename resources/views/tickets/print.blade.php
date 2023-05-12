@@ -121,6 +121,13 @@
 					</tr>
 				@endif
 			@endif
+
+			@if($amountPayment > $amountTickets)
+				<tr>
+					<th>Cambio</th>
+					<td>{{ number_format($amountPayment - $amountTickets, 2) }}</td>
+				</tr>
+			@endif
 		</table>
 
 		@if($status == 'Pago parcial' || $status == 'Reservado')

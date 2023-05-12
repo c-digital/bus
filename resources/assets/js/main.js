@@ -9,6 +9,7 @@ function confirmDelete(event, that) {
 
 $(document).ready(function () {
     i = 0;
+    seatChoose = '';
 
     $('.start-container').hide();
     $('.end-container').hide();
@@ -76,6 +77,8 @@ $(document).ready(function () {
         seat = seat.replace( /(<([^>]+)>)/ig, '');
         seat = seat.trim();
 
+        seatChoose = $(this);
+
         price = $('[name=price]').val();
 
         $('[name=seat]').val(seat);
@@ -136,6 +139,8 @@ $(document).ready(function () {
         `);
 
         $('#passenger-info').modal('hide');
+
+        seatChoose.addClass('selected');
 
         i++;
     });

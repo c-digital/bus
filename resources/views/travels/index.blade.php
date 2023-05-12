@@ -17,6 +17,7 @@
                         <th class="text-left p-2">{{ 'Paradas' }}</th>
                         <th class="text-left p-2">{{ 'Ruta' }}</th>
                         <th class="text-left p-2">{{ 'Precio' }}</th>
+                        <th class="text-left p-2">{{ 'Compañía' }}</th>
                         <th class="text-left p-2"></th>
                     </tr>
                 </thead>
@@ -31,6 +32,7 @@
                             <td class="p-2">{{ implode(', ', json($travel->stops)) }}</td>
                             <td class="p-2">{{ $travel->route->origin . ' x ' . $travel->route->destination }}</td>
                             <td class="p-2">{{ $travel->price }}</td>
+                            <td class="p-2">{{ $travel->company->name }}</td>
                             <td class="p-2 text-right">
                                 @if(can('routes.create'))
                                     <a class="hover:text-blue-600 p-1" href="{{ '/travels/edit/' . $travel->id }}" title="Editar">

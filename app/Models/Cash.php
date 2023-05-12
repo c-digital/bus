@@ -34,4 +34,9 @@ class Cash extends Model
         'balance',
         'status'
     ];
+
+    public function company()
+    {
+        return $this->belongsTo('Company', 'id_company');
+    }
 }
