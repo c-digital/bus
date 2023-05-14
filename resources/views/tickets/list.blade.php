@@ -45,6 +45,7 @@
                             <th>{{ 'Dirección' }}</th>
                             <th>{{ 'Asiento' }}</th>
                             <th>{{ 'Precio' }}</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -59,6 +60,11 @@
                                 <td>{{ $ticket->customer->address }}</td>
                                 <td>{{ $ticket->seat }}</td>
                                 <td>{{ number_format($ticket->amount, 2) }}</td>
+                                <td>
+                                    @if(get('status') == 'Reservado')
+                                        <a href="/payments/create?ticket={{ $ticket->id_sale }}" class="btn btn-primary btn-sm">Realizar pago</a>
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

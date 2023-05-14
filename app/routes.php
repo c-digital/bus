@@ -67,3 +67,9 @@ $route->resource('/cash', CashController::class);
 
 // Payments
 $route->resource('/payments', PaymentController::class);
+
+$route->get('/reports/cash', [ReportController::class, 'cash']);
+$route->get('/reports/sales', [ReportController::class, 'sales']);
+$route->get('/reports/passengers', [ReportController::class, 'passengers']);
+
+$route->get('/reports/print', [ReportController::class, 'print']);

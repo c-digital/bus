@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 11, 2023 at 09:16 AM
+-- Generation Time: May 13, 2023 at 03:49 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -334,7 +334,11 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (57, 'cash.index', 'Ver caja', '2023-04-13 19:31:31', '2023-04-13 19:31:38'),
 (58, 'cash.create', 'Crear caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
 (59, 'cash.edit', 'Editar caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
-(60, 'cash.delete', 'Eliminar caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04');
+(60, 'cash.delete', 'Eliminar caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(61, 'reports', 'Reportes', '2023-04-13 19:31:31', '2023-05-13 15:46:58'),
+(62, 'reports.sales', 'Reporte de ventas', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(63, 'reports.cash', 'Reporte de caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(64, 'reports.passengers', 'Reporte de pasajeros', '2023-04-13 19:31:31', '2023-04-13 20:01:04');
 
 -- --------------------------------------------------------
 
@@ -435,7 +439,11 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (57, 1, 57, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (58, 1, 58, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (59, 1, 59, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(60, 1, 60, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(60, 1, 60, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(61, 1, 61, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(62, 1, 62, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(63, 1, 63, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(64, 1, 64, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -768,7 +776,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -780,7 +788,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 
 --
 -- AUTO_INCREMENT for table `routes`

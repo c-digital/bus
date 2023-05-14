@@ -272,6 +272,52 @@
             </a>
           </li>
         @endif
+
+        @if(can('reports'))
+          <li class="nav-item">
+            <a data-menu="#reports" class="dropdown-menu-select nav-link {{ strpos($active, 'reports') !== false ? 'active' : '' }}" href="#">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-list"></i>
+              </div>
+              <span class="nav-link-text ms-1">Reportes</span>
+            </a>
+          </li>
+
+          <div id="reports" class="{{ strpos($active, 'reports') !== false ? '' : 'dropdown-menu-container' }}">
+            @if(can('reports.cash'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'reports.cash' ? 'active' : '' }}" href="/reports/cash">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-list"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Caja</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('reports.sales'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'reports.sales' ? 'active' : '' }}" href="/reports/sales">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-list"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Ventas</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('reports.passengers'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'reports.passengers' ? 'active' : '' }}" href="/reports/passengers">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-list"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Pasajeros</span>
+                </a>
+              </li>
+            @endif
+          </div>
+        @endif
       </ul>
     </div>
   </aside>
