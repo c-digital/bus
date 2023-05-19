@@ -1,5 +1,18 @@
 <?php
 
+function seat_class($seat, $paid, $reserved)
+{
+	if (in_array($seat, $paid)) {
+		return 'seat ladies';
+	}
+
+	if (in_array($seat, $reserved)) {
+		return 'seat occupied ChooseSeat selected';
+	}
+
+	return 'seat occupied ChooseSeat';
+}
+
 function translateDays($days)
 {
 	$string = implode(', ', json($days));

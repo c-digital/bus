@@ -275,6 +275,52 @@
 
         @if(can('reports'))
           <li class="nav-item">
+            <a data-menu="#merchandise" class="dropdown-menu-select nav-link {{ strpos($active, 'merchandise') !== false ? 'active' : '' }}" href="#">
+              <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <i class="fa fa-truck"></i>
+              </div>
+              <span class="nav-link-text ms-1">Mercadería</span>
+            </a>
+          </li>
+
+          <div id="merchandise" class="{{ strpos($active, 'merchandise') !== false ? '' : 'dropdown-menu-container' }}">
+            @if(can('merchandise.create'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'merchandise.create' ? 'active' : '' }}" href="/merchandise/create">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-circle"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Agregar</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('merchandise.index'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'merchandise.index' ? 'active' : '' }}" href="/merchandise/index">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-circle"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Lista</span>
+                </a>
+              </li>
+            @endif
+
+            @if(can('merchandise.price-per-kg'))
+              <li class="nav-item">
+                <a class="nav-link {{ $active == 'marchandise.price-per-kg' ? 'active' : '' }}" href="/marchandise/price-per-kg">
+                  <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                    <i class="fa fa-circle"></i>
+                  </div>
+                  <span class="nav-link-text ms-1">Precio por kg</span>
+                </a>
+              </li>
+            @endif
+          </div>
+        @endif
+
+        @if(can('reports'))
+          <li class="nav-item">
             <a data-menu="#reports" class="dropdown-menu-select nav-link {{ strpos($active, 'reports') !== false ? 'active' : '' }}" href="#">
               <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                 <i class="fa fa-list"></i>

@@ -41,6 +41,12 @@
                                 <td class="p-2">{{ $item->vehicle->internal_number . ' - ' . $item->vehicle->type->type . ' - ' . $item->vehicle->plate }}</td>
                                 <td class="p-2">{{ $item->travel->time . ' - ' . $item->travel->route->destination . ' x ' . $item->travel->route->origin }}</td>
                                 <td class="p-2 text-right">
+                                    <a href="/tickets/list/{{ $item->id }}?status=Vendido" class="btn btn-success btn-sm">Ver tickets vendidos</a>
+
+                                    <a href="/tickets/list/{{ $item->id }}?status=Reservado" class="btn btn-info btn-sm">Ver tickets reservados</a>
+
+                                    <a href="" data-bs-toggle="modal" data-bs-target="#{{ 'assignStatus_' . $item->id }}" class="btn btn-secondary btn-sm">Cambiar estado</a>
+                                    
                                     @if(can('tickets.create'))
                                         <a class="btn btn-primary btn-sm" href="{{ '/tickets/create?assign=' . $item->id }}" title="Seleccionar">
                                             Seleccionar
@@ -48,6 +54,8 @@
                                     @endif
                                 </td>
                             </tr>
+
+                            @include('tickets.status')
                         @endforeach
                     </tbody>
                 </table>

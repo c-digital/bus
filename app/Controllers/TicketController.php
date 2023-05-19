@@ -38,12 +38,23 @@ class TicketController extends Controller
 
         $html = "";
 
-        $bookArray = [];
+        $paid = [];
+        $reserved = [];
 
-        $tickets = Ticket::where('id_assign', get('assign'))->get();
+        $tickets = Ticket::where('id_assign', get('assign'))
+            ->has('payments')
+            ->get();
 
         foreach ($tickets as $ticket) {
-            $bookArray[] = $ticket->seat;
+            $paid[] = $ticket->seat;
+        }
+
+        $tickets = Ticket::where('id_assign', get('assign'))
+            ->doesntHave('payments')
+            ->get();
+
+        foreach ($tickets as $ticket) {
+            $reserved[] = $ticket->seat;
         }
         
 
@@ -58,7 +69,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>
@@ -89,7 +100,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>
@@ -120,7 +131,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>
@@ -151,7 +162,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>
@@ -184,7 +195,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>
@@ -215,7 +226,7 @@ class TicketController extends Controller
                 }
 
                 $html .= "<div class=\"col-2\">
-                    <div class='" . (in_array($seat, $bookArray) ? ("seat ladies") : ("seat occupied ChooseSeat")) . "' data-item=\"\">
+                    <div class='" . seat_class($seat, $paid, $reserved) . "' data-item=\"\">
                     <div class=\"seat-body\">
                         $seat
                         <span class=\"seat-handle-left\"></span>

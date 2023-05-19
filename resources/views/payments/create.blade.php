@@ -109,7 +109,11 @@
 
 	<form target="_blank" action="/tickets/print" onclick="window.location.href = '/tickets/create?assign={{ $tickets[0]->id_assign }}'" method="POST">
 		<input type="hidden" name="id_sale" value="{{ request('ticket') }}">
-		<button class="btn btn-primary">Procesar venta</button>
-		<button class="btn btn-primary">Reservar</button>
+
+		@if($payments->count())
+			<button class="btn btn-primary">Procesar venta</button>
+		@else
+			<button class="btn btn-primary">Reservar</button>
+		@endif
 	</form>
 </x-template-dashboard>

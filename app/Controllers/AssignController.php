@@ -71,7 +71,22 @@ class AssignController extends Controller
     {
         if (get('status')) {
             Assign::find(request('id'))
-                ->update(['status' => request('post')]);
+                ->update(['status' => request('status')]);
+
+            if (request('start')) {
+                Assign::find(request('id'))
+                    ->update([
+                        'start' => request('start')
+                    ]);
+            }
+
+            if (request('end')) {
+                Assign::find(request('id'))
+                    ->update([
+                        'end' => request('end'),
+                        'amount' => request('amount')
+                    ]);
+            }
 
             return redirect('/assign')
                 ->with('success', 'Estado de asignación cambiado satisfactoriamente');

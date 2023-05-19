@@ -19,6 +19,7 @@ $(document).ready(function () {
 
         $('.start-container').hide();
         $('.end-container').hide();
+        $('.amount-container').hide();
 
         if (status == 'Iniciado') {
             $('.start-container').show();
@@ -26,6 +27,7 @@ $(document).ready(function () {
 
         if (status == 'Finalizado') {
             $('.end-container').show();
+            $('.amount-container').show();
         }
     });
 

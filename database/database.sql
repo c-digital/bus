@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 13, 2023 at 03:49 PM
+-- Generation Time: May 18, 2023 at 07:59 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -30,6 +30,7 @@ CREATE TABLE `assign` (
   `status` varchar(256) DEFAULT NULL,
   `start` varchar(256) DEFAULT NULL,
   `end` varchar(256) DEFAULT NULL,
+  `amount` varchar(256) DEFAULT NULL,
   `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -38,10 +39,10 @@ CREATE TABLE `assign` (
 -- Dumping data for table `assign`
 --
 
-INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `status`, `start`, `end`, `date_create`, `date_update`) VALUES
-(1, '2023-05-06', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-04-26 18:44:20', '2023-05-07 16:51:32'),
-(2, '2023-05-22', '6', '1', '4', 'No iniciado', NULL, NULL, '2023-05-10 21:50:00', '2023-05-10 21:50:00'),
-(3, '2023-05-11', '6', '1', '2', 'No iniciado', NULL, NULL, '2023-05-10 21:50:23', '2023-05-11 07:51:43');
+INSERT INTO `assign` (`id`, `date`, `id_driver`, `id_vehicle`, `id_travel`, `status`, `start`, `end`, `amount`, `date_create`, `date_update`) VALUES
+(1, '2023-05-18', '6', '1', '2', 'No iniciado', NULL, NULL, NULL, '2023-04-26 18:44:20', '2023-05-18 18:22:49'),
+(2, '2023-05-22', '6', '1', '4', 'No iniciado', NULL, NULL, NULL, '2023-05-10 21:50:00', '2023-05-10 21:50:00'),
+(3, '2023-05-11', '6', '1', '2', 'No iniciado', NULL, NULL, NULL, '2023-05-10 21:50:23', '2023-05-11 07:51:43');
 
 -- --------------------------------------------------------
 
@@ -187,9 +188,30 @@ CREATE TABLE `customers` (
 
 INSERT INTO `customers` (`id`, `name`, `ci`, `date_birth`, `age`, `phone`, `address`, `date_create`, `date_update`) VALUES
 (4, 'Nisa Delgado', '24370873', '1993-01-01', '29', '04246402701', 'Calle 90, Av. 16, Sector Nueva Vía, #16b-37', '2023-04-28 13:37:00', '2023-04-28 13:37:00'),
-(22, 'Jose', '545456', '2000-06-05', '', '55435', 'Nueva Chicago', '2023-05-06 15:55:55', '2023-05-06 15:55:55'),
-(23, 'Erick Santos', '10756777', '1986-11-11', '', '+59171608981', 'Calle Perú 235', '2023-05-06 19:16:46', '2023-05-06 19:16:46'),
-(24, 'Daiane Marques', '11252881', '1989-01-09', '', '75602777', 'Av Bush nro 790', '2023-05-06 20:19:05', '2023-05-06 20:19:05');
+(22, 'Jose', '545456', '2000-06-05', '23', '55435', 'Nueva Chicago', '2023-05-06 15:55:55', '2023-05-13 16:40:15'),
+(23, 'Erick Santos', '10756777', '1986-11-11', '36', '+59171608981', 'Calle Perú 235', '2023-05-06 19:16:46', '2023-05-13 16:40:15'),
+(24, 'Daiane Marques', '11252881', '1989-01-09', '33', '75602777', 'Av Bush nro 790', '2023-05-06 20:19:05', '2023-05-13 16:40:32');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `merchandise`
+--
+
+CREATE TABLE `merchandise` (
+  `id` int(11) NOT NULL,
+  `messenger` varchar(256) DEFAULT NULL,
+  `origin` varchar(256) DEFAULT NULL,
+  `destination` varchar(256) DEFAULT NULL,
+  `description` varchar(256) DEFAULT NULL,
+  `weight` varchar(256) DEFAULT NULL,
+  `price` varchar(256) DEFAULT NULL,
+  `receipt` varchar(256) DEFAULT NULL,
+  `discount` varchar(256) DEFAULT NULL,
+  `total` varchar(256) DEFAULT NULL,
+  `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -338,7 +360,10 @@ INSERT INTO `permissions` (`id`, `name`, `description`, `date_create`, `date_upd
 (61, 'reports', 'Reportes', '2023-04-13 19:31:31', '2023-05-13 15:46:58'),
 (62, 'reports.sales', 'Reporte de ventas', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
 (63, 'reports.cash', 'Reporte de caja', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
-(64, 'reports.passengers', 'Reporte de pasajeros', '2023-04-13 19:31:31', '2023-04-13 20:01:04');
+(64, 'reports.passengers', 'Reporte de pasajeros', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(65, 'merchandise.create', 'Crear mercadería', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(66, 'merchandise.index', 'Lista de mercadería', '2023-04-13 19:31:31', '2023-04-13 20:01:04'),
+(67, 'merchandise.price-per-kg', 'Establecer precio por kg', '2023-04-13 19:31:31', '2023-05-18 18:59:33');
 
 -- --------------------------------------------------------
 
@@ -443,7 +468,10 @@ INSERT INTO `role_has_permissions` (`id`, `id_role`, `id_permission`, `date_crea
 (61, 1, 61, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (62, 1, 62, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
 (63, 1, 63, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
-(64, 1, 64, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
+(64, 1, 64, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(65, 1, 65, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(66, 1, 66, '2023-04-13 20:12:06', '2023-04-13 20:12:06'),
+(67, 1, 67, '2023-04-13 20:12:06', '2023-04-13 20:12:06');
 
 -- --------------------------------------------------------
 
@@ -495,17 +523,13 @@ CREATE TABLE `tickets` (
 
 INSERT INTO `tickets` (`id`, `id_customer`, `id_assign`, `id_sale`, `id_company`, `id_user`, `seat`, `status`, `amount`, `date_create`, `date_update`) VALUES
 (13, '4', '1', '1', '3', '1', '05', '0', '80', '2023-05-05 15:06:06', '2023-05-05 15:43:33'),
-(16, '4', '1', '4', '3', '1', '13', '0', '80', '2023-05-06 12:50:31', '2023-05-06 19:47:21'),
-(17, '4', '1', '5', '3', '1', '20', '0', '80', '2023-05-06 12:51:35', '2023-05-06 19:47:21'),
-(19, '4', '1', '7', '3', '1', '25', '0', '80', '2023-05-06 12:53:56', '2023-05-06 19:47:21'),
-(25, '4', '1', '13', '3', '1', '14', '0', '80', '2023-05-06 14:37:51', '2023-05-06 19:47:21'),
 (31, '22', '1', '19', '3', '1', '22', '0', '80', '2023-05-06 15:56:11', '2023-05-06 19:47:22'),
 (32, '23', '1', '20', '3', '1', '06', '0', '80', '2023-05-06 19:16:46', '2023-05-06 19:47:22'),
-(33, '4', '1', '21', '3', '1', '32', '0', '80', '2023-05-06 19:58:03', '2023-05-06 19:58:03'),
 (34, '24', '1', '22', '3', '1', '11', '0', '80', '2023-05-06 20:19:05', '2023-05-06 20:19:05'),
 (35, '23', '3', '23', '3', '1', '01', '0', '80', '2023-05-10 21:56:52', '2023-05-10 21:56:52'),
 (36, '24', '3', '24', '3', '1', '02', '0', '80', '2023-05-10 22:15:39', '2023-05-10 22:15:39'),
-(37, '4', '3', '24', '3', '1', '03', '0', '80', '2023-05-10 22:15:39', '2023-05-10 22:15:39');
+(37, '4', '3', '24', '3', '1', '03', '0', '80', '2023-05-10 22:15:39', '2023-05-10 22:15:39'),
+(38, '4', '1', '25', '3', '1', '10', '0', '80', '2023-05-18 00:12:54', '2023-05-18 00:12:54');
 
 -- --------------------------------------------------------
 
@@ -531,8 +555,8 @@ CREATE TABLE `travels` (
 --
 
 INSERT INTO `travels` (`id`, `time`, `days`, `status`, `stops`, `id_route`, `id_company`, `price`, `date_create`, `date_update`) VALUES
-(2, '12', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"]', 'active', '[\"Barquisimeto\"]', '2', '3', '80', '2023-04-26 18:19:26', '2023-05-11 08:17:20'),
-(3, '12', '[\"monday\"]', 'active', '[\"Maracaibo\"]', '2', '3', '100', '2023-05-10 21:37:03', '2023-05-11 08:17:21'),
+(2, '12:00', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\"]', 'active', '[\"Barquisimeto\"]', '2', '3', '80', '2023-04-26 18:19:26', '2023-05-13 16:24:14'),
+(3, '12:00', '[\"monday\"]', 'active', '[\"Maracaibo\"]', '2', '3', '100', '2023-05-10 21:37:03', '2023-05-13 16:24:15'),
 (4, '22:00', '[\"monday\",\"tuesday\",\"wednesday\",\"thursday\",\"friday\",\"saturday\",\"sunday\"]', 'active', '[\"Maracaibo\",\"Caracas\",\"Barquisimeto\"]', '2', '3', '150', '2023-05-10 21:46:38', '2023-05-11 08:17:21');
 
 -- --------------------------------------------------------
@@ -638,6 +662,12 @@ ALTER TABLE `companies`
 -- Indexes for table `customers`
 --
 ALTER TABLE `customers`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `merchandise`
+--
+ALTER TABLE `merchandise`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -755,6 +785,12 @@ ALTER TABLE `customers`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
+-- AUTO_INCREMENT for table `merchandise`
+--
+ALTER TABLE `merchandise`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `methods`
 --
 ALTER TABLE `methods`
@@ -776,7 +812,7 @@ ALTER TABLE `payments`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -788,7 +824,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `role_has_permissions`
 --
 ALTER TABLE `role_has_permissions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT for table `routes`
@@ -800,7 +836,7 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `travels`

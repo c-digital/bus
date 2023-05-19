@@ -23,7 +23,7 @@ class Assign extends Model
      *
      * @var array
      */
-    protected $fillable = ['date', 'status', 'start', 'end', 'id_driver', 'id_vehicle', 'id_travel'];
+    protected $fillable = ['date', 'status', 'start', 'end', 'amount', 'id_driver', 'id_vehicle', 'id_travel'];
 
     public function driver()
     {
