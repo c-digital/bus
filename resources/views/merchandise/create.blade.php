@@ -1,4 +1,6 @@
 <x-template-dashboard active="merchandise.create" title="Crear mercadería">
+	<x-alert></x-alert>
+	
 	<form action="/merchandise/store" method="POST">
 		<div class="card">
 			<div class="card-header">Mensajero</div>
@@ -90,21 +92,21 @@
 					<div class="col">
 						<div class="form-group">
 							<label for="weight">Peso</label>
-							<input type="text" class="form-control" name="weight" required>
+							<input type="number" class="form-control" name="weight" required>
 						</div>
 					</div>
 
 					<div class="col">
 						<div class="form-group">
 							<label>Precio por kg</label>
-							<input type="text" class="form-control" readonly value="{{ config('pricePerKg') }}">
+							<input type="number" name="pricePerKg" class="form-control" readonly value="{{ config('pricePerKg') }}">
 						</div>
 					</div>
 
 					<div class="col">
 						<div class="form-group">
 							<label for="price">Precio del envío</label>
-							<input type="text" class="form-control" name="price" required readonly>
+							<input type="number" class="form-control" name="price" required readonly>
 						</div>
 					</div>
 				</div>
@@ -173,6 +175,30 @@
 							<label for="total">Total</label>
 							<input type="number" name="total" readonly class="form-control" required>
 						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						<div class="form-group">
+							<label for="billing">Estado</label>
+							<select required name="billing" class="form-control">
+								<option value="Por cobrar">Por cobrar</option>
+								<option value="Pagado">Pagado</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="col">
+						<div class="form-group method-container">
+	                        <label for="method">Método de pago</label>
+	                        <select name="method" class="form-control">
+	                            <option value=""></option>
+	                            @foreach($methods as $method)
+	                                <option value="{{ $method->name }}">{{ $method->name }}</option>
+	                            @endforeach
+	                        </select>
+	                    </div>
 					</div>
 				</div>
 			</div>

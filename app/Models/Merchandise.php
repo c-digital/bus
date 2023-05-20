@@ -1,6 +1,6 @@
 <?php
 
-use App\Models;
+namespace App\Models;
 
 class Merchandise extends Model
 {
@@ -9,6 +9,9 @@ class Merchandise extends Model
 	protected $primaryKey = 'id';
 
 	protected $fillable = [
+		'id_company',
+		'id_user',
+		'id_assign',
 		'messenger',
 		'origin',
 		'destination',
@@ -16,7 +19,24 @@ class Merchandise extends Model
 		'weight',
 		'price',
 		'receipt',
+		'billing',
 		'discount',
-		'total'
+		'total',
+		'status'
 	];
+
+	public function company()
+    {
+        return $this->belongsTo('Company', 'id_company');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('User', 'id_user');
+    }
+
+    public function getKgAttribute()
+    {
+    	return $this->price / $this->weight;
+    }
 }

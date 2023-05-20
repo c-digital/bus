@@ -13,6 +13,7 @@ $(document).ready(function () {
 
     $('.start-container').hide();
     $('.end-container').hide();
+    $('.method-container').hide();
 
     $('[name=status]').change(function () {
         status = $(this).val();
@@ -20,6 +21,7 @@ $(document).ready(function () {
         $('.start-container').hide();
         $('.end-container').hide();
         $('.amount-container').hide();
+        $('.method-container').hide();
 
         if (status == 'Iniciado') {
             $('.start-container').show();
@@ -29,6 +31,35 @@ $(document).ready(function () {
             $('.end-container').show();
             $('.amount-container').show();
         }
+
+        if (status == 'Pagado') {
+            $('.method-container').show();
+        }
+    });
+
+    $('[name=weight]').keyup(function () {
+        weight = $('[name=weight]').val();
+        weight = parseFloat(weight);
+
+        kg = $('[name=pricePerKg]').val();
+        kg = parseFloat(kg);
+
+        price = weight * kg;
+
+        $('[name=price').val(price);
+        $('[name=total').val(price);
+    });
+
+    $('[name=discount]').keyup(function () {
+        discount = $('[name=discount]').val();
+        discount = parseFloat(discount);
+
+        price = $('[name=price]').val();
+        price = parseFloat(price);
+
+        price = price - discount;
+
+        $('[name=total').val(price);
     });
 
     if (window.location.href.indexOf('bus-type/edit')) {

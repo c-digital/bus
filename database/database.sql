@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 18, 2023 at 07:59 PM
+-- Generation Time: May 19, 2023 at 05:31 PM
 -- Server version: 5.7.42
 -- PHP Version: 8.1.16
 
@@ -200,6 +200,8 @@ INSERT INTO `customers` (`id`, `name`, `ci`, `date_birth`, `age`, `phone`, `addr
 
 CREATE TABLE `merchandise` (
   `id` int(11) NOT NULL,
+  `id_company` varchar(256) DEFAULT NULL,
+  `id_user` varchar(256) DEFAULT NULL,
   `messenger` varchar(256) DEFAULT NULL,
   `origin` varchar(256) DEFAULT NULL,
   `destination` varchar(256) DEFAULT NULL,
@@ -207,10 +209,13 @@ CREATE TABLE `merchandise` (
   `weight` varchar(256) DEFAULT NULL,
   `price` varchar(256) DEFAULT NULL,
   `receipt` varchar(256) DEFAULT NULL,
+  `billing` varchar(256) DEFAULT NULL,
   `discount` varchar(256) DEFAULT NULL,
   `total` varchar(256) DEFAULT NULL,
+  `status` varchar(256) DEFAULT NULL,
   `date_update` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `date_create` datetime DEFAULT CURRENT_TIMESTAMP
+  `date_create` datetime DEFAULT CURRENT_TIMESTAMP,
+  `id_assign` varchar(256) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

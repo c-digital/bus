@@ -297,7 +297,7 @@
 
             @if(can('merchandise.index'))
               <li class="nav-item">
-                <a class="nav-link {{ $active == 'merchandise.index' ? 'active' : '' }}" href="/merchandise/index">
+                <a class="nav-link {{ $active == 'merchandise.index' ? 'active' : '' }}" href="/merchandise">
                   <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-circle"></i>
                   </div>
