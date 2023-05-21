@@ -41,7 +41,7 @@ class TravelController extends Controller
             'price' => request('price'),
         ]);
 
-        return redirect('/travels')->with('success', 'Viaje creado satisfactoriamente');
+        return redirect('/travels')->with('info', 'Viaje creado satisfactoriamente');
     }
 
     public function edit($id)
@@ -67,12 +67,12 @@ class TravelController extends Controller
                 'price' => request('price'),
             ]);
 
-        return redirect('/travels')->with('success', 'Viaje actualizado satisfactoriamente');
+        return redirect('/travels')->with('info', 'Viaje actualizado satisfactoriamente');
     }
 
     public function delete($id)
     {
         Travel::find($id)->delete();
-        return redirect('/travels')->with('success', 'Viaje eliminado satisfactoriamente');
+        return redirect('/travels')->with('info', 'Viaje eliminado satisfactoriamente');
     }
 }

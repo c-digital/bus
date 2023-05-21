@@ -54,7 +54,7 @@ class AssignController extends Controller
         ]);
 
         return redirect('/assign')
-            ->with('success', 'Asignación creada satisfactoriamente');
+            ->with('info', 'Asignación creada satisfactoriamente');
     }
 
     public function edit($id)
@@ -73,6 +73,16 @@ class AssignController extends Controller
             Assign::find(request('id'))
                 ->update(['status' => request('status')]);
 
+            if (request('status') == 'Iniciado') {
+                Merchandise::where('id_assign', request('id'))
+                    ->update(['status' => 'En transito'])
+            }
+
+            if (request('status') == 'Finalizado') {
+                Merchandise::where('id_assign', request('id'))
+                    ->update(['status' => 'En destino'])
+            }
+
             if (request('start')) {
                 Assign::find(request('id'))
                     ->update([
@@ -89,7 +99,7 @@ class AssignController extends Controller
             }
 
             return redirect('/assign')
-                ->with('success', 'Estado de asignación cambiado satisfactoriamente');
+                ->with('info', 'Estado de asignación cambiado satisfactoriamente');
         }
 
         $day = carbon()
@@ -115,7 +125,7 @@ class AssignController extends Controller
         ]);
 
         return redirect('/assign')
-            ->with('success', 'Asignación editada satisfactoriamente');
+            ->with('info', 'Asignación editada satisfactoriamente');
     }
 
     public function delete($id)
@@ -124,6 +134,6 @@ class AssignController extends Controller
             ->delete();
 
         return redirect('/assign')
-            ->with('success', 'Asignación eliminada satisfactoriamente');
+            ->with('info', 'Asignación eliminada satisfactoriamente');
     }
 }

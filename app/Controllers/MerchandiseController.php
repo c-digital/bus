@@ -17,12 +17,12 @@ class MerchandiseController extends Controller
 
     public function index()
     {
-        $assign = Assign::where('date', '>=', now('Y-m-d'))
+        $assigns = Assign::where('date', '>=', now('Y-m-d'))
             ->get();
 
         $merchandise = Merchandise::get();
 
-        return view('merchandise.index', compact('assign', 'merchandise'));
+        return view('merchandise.index', compact('assigns', 'merchandise'));
     }
 
     public function show($id)
@@ -89,7 +89,14 @@ class MerchandiseController extends Controller
         }
 
         return redirect('/merchandise')
-            ->with('success', 'Mercadería registrada satisfactoriamente');
+            ->with('info', 'Mercadería registrada satisfactoriamente');
+    }
+
+    public function edit($id)
+    {
+        if (request('price-per-kg')) {
+            return view('merchandise.price-per-kg');
+        }
     }
 
     public function update()
@@ -102,7 +109,7 @@ class MerchandiseController extends Controller
                 ]);
 
             return redirect('/merchandise')
-                ->with('success', 'Mercadería asignada satisfactoriamente a viaje seleccionado');
+                ->with('info', 'Mercadería asignada satisfactoriamente a viaje seleccionado');
         }
 
         if (request('delivered')) {
@@ -112,7 +119,27 @@ class MerchandiseController extends Controller
                 ]);
 
             return redirect('/merchandise')
-                ->with('success', 'Mercadería marcada como entregada');
+                ->with('info', 'Mercadería marcada como entregada');
+        }
+
+        if (request('price-per-kg')) {
+            $array = require 'app/config.php';
+            $pricePerKgOld = $array['pricePerKg'];
+
+            $pricePerKgCurrent = request('price-per-kg');
+
+            $string = file_get_contents('app/config.php');
+
+            $string = str_replace(
+                "'pricePerKg' => '$pricePerKgOld'",
+                "'pricePerKg' => '$pricePerKgCurrent'",
+                $string
+            );
+
+            file_put_contents('app/config.php', $string);
+
+            return redirect('/merchandise/edit/0?price-per-kg=1')
+                ->with('info', 'Precio por kilogramo actualizado satisfactoriamente');
         }
     }
 
@@ -121,6 +148,6 @@ class MerchandiseController extends Controller
         Merchandise::find($id)->delete();
 
         return redirect('/merchandise')
-            ->with('success', 'Mercadería eliminada satisfactoriamente');
+            ->with('info', 'Mercadería eliminada satisfactoriamente');
     }
 }

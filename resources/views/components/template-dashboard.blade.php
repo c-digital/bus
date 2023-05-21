@@ -308,7 +308,7 @@
 
             @if(can('merchandise.price-per-kg'))
               <li class="nav-item">
-                <a class="nav-link {{ $active == 'marchandise.price-per-kg' ? 'active' : '' }}" href="/marchandise/price-per-kg">
+                <a class="nav-link {{ $active == 'marchandise.price-per-kg' ? 'active' : '' }}" href="/merchandise/edit/0?price-per-kg=1">
                   <div class="p-2 shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                     <i class="fa fa-circle"></i>
                   </div>

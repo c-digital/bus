@@ -43,7 +43,7 @@ class RoleController extends Controller
                 ]);
         }
 
-        return redirect('/roles')->with('success', 'Rol creado satisfactoriamente');
+        return redirect('/roles')->with('info', 'Rol creado satisfactoriamente');
     }
 
     public function edit($id)
@@ -78,12 +78,12 @@ class RoleController extends Controller
                 ]);
         }
 
-        return redirect('/roles')->with('success', 'Rol actualizado satisfactoriamente');
+        return redirect('/roles')->with('info', 'Rol actualizado satisfactoriamente');
     }
 
     public function delete($id)
     {
         Role::find($id)->delete();
-        return redirect('/roles')->with('success', 'Rol eliminado satisfactoriamente');
+        return redirect('/roles')->with('info', 'Rol eliminado satisfactoriamente');
     }
 }

@@ -40,7 +40,7 @@
 									<a href="" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="{{ '#assign' . $item->id }}">Asignar a viaje</a>
 								@endif
 
-								@if($item->status == 'Asignado')
+								@if($item->status == 'En destino')
 									<form action="/merchandise/update" method="POST">
 										<input type="hidden" name="id" value="{{ $item->id }}">
 										<input type="hidden" name="delivered" value="1">

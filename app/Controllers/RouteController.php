@@ -35,7 +35,7 @@ class RouteController extends Controller
             'distance' => request('distance'),
         ]);
 
-        return redirect('/routes')->with('success', 'Ruta creada satisfactoriamente');
+        return redirect('/routes')->with('info', 'Ruta creada satisfactoriamente');
     }
 
     public function edit($id)
@@ -56,12 +56,12 @@ class RouteController extends Controller
                 'distance' => request('distance'),
             ]);
 
-        return redirect('/routes')->with('success', 'Ruta actualizado satisfactoriamente');
+        return redirect('/routes')->with('info', 'Ruta actualizado satisfactoriamente');
     }
 
     public function delete($id)
     {
         Route::find($id)->delete();
-        return redirect('/routes')->with('success', 'Ruta eliminado satisfactoriamente');
+        return redirect('/routes')->with('info', 'Ruta eliminado satisfactoriamente');
     }
 }

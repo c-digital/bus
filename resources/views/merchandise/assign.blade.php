@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form action="/merchandise/update" method="POST">
-                <input required type="hidden" name="id" value="{{ $merchandise->id }}">
+                <input required type="hidden" name="id" value="{{ $item->id }}">
 
                 <div class="modal-header">
                     <h5 class="modal-title">Asignar a viaje</h5>
@@ -14,9 +14,9 @@
                     <select name="id_assign" required class="form-control">
                         <option value=""></option>
 
-                        @foreach($assign as $item)
-                            <option value="{{ $item->id }}">
-                                {{ $item->date . ' ' . $item->travel->time . ' - ' . $item->travel->route->origin . ' x ' . $item->travel->route->destination }}
+                        @foreach($assigns as $assign)
+                            <option value="{{ $assign->id }}">
+                                {{ $assign->date . ' ' . $assign->travel->time . ' - ' . $assign->travel->route->origin . ' x ' . $assign->travel->route->destination }}
                             </option>
                         @endforeach
                     </select>

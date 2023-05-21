@@ -1,7 +1,10 @@
 <div class="modal" id="{{ 'assignStatus_' . $item->id }}" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form action="/assign/update/{{ $item->id }}?status=1" method="POST">
+            <form action="/assign/update" method="POST">
+                <input type="hidden" name="id" value="{{ $item->id }}">
+                <input type="hidden" name="status" value="1">
+                
                 <div class="modal-header">
                     <h5 class="modal-title">Cambiar estado</h5>
                     

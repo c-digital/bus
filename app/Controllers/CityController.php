@@ -28,7 +28,7 @@ class CityController extends Controller
             'name' => request('name')
         ]);
 
-        return redirect('/cities')->with('success', 'Ciudad creado satisfactoriamente');
+        return redirect('/cities')->with('info', 'Ciudad creado satisfactoriamente');
     }
 
     public function edit($id)
@@ -45,12 +45,12 @@ class CityController extends Controller
                 'name' => request('name')
             ]);
 
-        return redirect('/cities')->with('success', 'Ciudad actualizado satisfactoriamente');
+        return redirect('/cities')->with('info', 'Ciudad actualizado satisfactoriamente');
     }
 
     public function delete($id)
     {
         City::find($id)->delete();
-        return redirect('/cities')->with('success', 'Ciudad eliminado satisfactoriamente');
+        return redirect('/cities')->with('info', 'Ciudad eliminado satisfactoriamente');
     }
 }

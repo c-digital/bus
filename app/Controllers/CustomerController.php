@@ -33,7 +33,7 @@ class CustomerController extends Controller
             'address' => request('address')
         ]);
 
-        return redirect('/customers')->with('success', 'Cliente creado satisfactoriamente');
+        return redirect('/customers')->with('info', 'Cliente creado satisfactoriamente');
     }
 
     public function edit($id)
@@ -54,7 +54,7 @@ class CustomerController extends Controller
             'address' => request('address')
         ]);
 
-        return redirect('/customers')->with('success', 'Cliente editado satisfactoriamente');
+        return redirect('/customers')->with('info', 'Cliente editado satisfactoriamente');
     }
 
     public function delete($id)
@@ -63,7 +63,7 @@ class CustomerController extends Controller
             ->delete();
 
         return redirect('/customers')
-            ->with('success', 'Cliente eliminado satisfactoriamente');
+            ->with('info', 'Cliente eliminado satisfactoriamente');
     }
 
     public function info()
